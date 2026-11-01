@@ -15,8 +15,6 @@
  */
 window.CUPID_CONTENT = (function () {
   const blank = { th: "", en: "" };
-  // Text the owner wrote in Thai only (the English page shows the same Thai).
-  const th = (s) => ({ th: s, en: "" });
 
   const IMAGES = {
     "fahsan-chibi-wink": {
@@ -79,94 +77,162 @@ window.CUPID_CONTENT = (function () {
     nameTh: "คิวปิด",
     mainImage: "rapizran-chibi-full",
     /*
-     * Everything below in PROFILE is the owner's own text, copied unchanged (spelling included).
-     * The owner wrote it in Thai only, so the English page shows the same Thai words: fill in
-     * an `en` only with the owner's own English. Items marked "Dark mode" by the owner have
-     * mode: "dark" and are never rendered in Light mode.
+     * Everything below in PROFILE is the owner's own Thai text. The only changes are three
+     * spelling fixes (ถูด→ถูก, นี้→นี่, " ,ที่รัก"→", ที่รัก"). The English is a translation
+     * written for this site at the owner's request. Items the owner marked "Dark mode"
+     * have mode: "dark" and are never rendered in Light mode.
      */
     // 1. ข้อมูลพื้นฐาน. book: true = also shown on the "About me" diary page.
     facts: [
       { label: "fact.name", value: { th: "คิวปิด", en: "Cupid" }, book: true },
       { label: "fact.height", value: "197 cm.", book: true },
       { label: "fact.weight", value: "90 kg.", book: true },
-      { label: "fact.gender", value: th("ชาย (เพศจริงไม่ทราบ)"), book: true },
-      { label: "fact.species", value: th("ตัวตนในจินตนาการ Imaginary Entity"), book: true },
-      { label: "fact.age", value: th("27 (อายุจริงไม่ทราบ)"), book: true },
-      { label: "fact.birthday", value: th("14 กุมภา"), book: true },
-      { label: "fact.measurements", value: th("รอบไหล่54นิ้ว รอบอก47นิ้ว รอบเอว33นิ้ว รอบสะโพก39นิ้ว (รูปร่างจริงไม่ตายตัว)") },
-      { label: "fact.occupation", value: th("ที่ปรึกษาพิเศษ"), book: true },
-      { label: "fact.colour", value: th("สีชมพู") },
-      { label: "fact.flower", value: th("ดอกกุหลาบสีแดง") },
-      // The owner wrote "อิโมจิใน Dark mode" but has not sent the emoji yet.
-      { label: "fact.emoji", value: blank, mode: "dark" },
+      { label: "fact.gender", value: { th: "ชาย (เพศจริงไม่ทราบ)", en: "Male (true sex unknown)" }, book: true },
+      { label: "fact.species", value: { th: "ตัวตนในจินตนาการ Imaginary Entity", en: "Imaginary Entity" }, book: true },
+      { label: "fact.age", value: { th: "27 (อายุจริงไม่ทราบ)", en: "27 (true age unknown)" }, book: true },
+      { label: "fact.birthday", value: { th: "14 กุมภา", en: "14 February" }, book: true },
+      {
+        label: "fact.measurements",
+        value: {
+          th: "รอบไหล่54นิ้ว รอบอก47นิ้ว รอบเอว33นิ้ว รอบสะโพก39นิ้ว (รูปร่างจริงไม่ตายตัว)",
+          en: "Shoulders 54 in, chest 47 in, waist 33 in, hips 39 in (his true shape is not fixed)",
+        },
+      },
+      { label: "fact.occupation", value: { th: "ที่ปรึกษาพิเศษ", en: "Special Advisor" }, book: true },
+      { label: "fact.colour", value: { th: "สีชมพู", en: "Pink" } },
+      { label: "fact.flower", value: { th: "ดอกกุหลาบสีแดง", en: "Red rose" } },
+      // Shown in both modes. The owner has not sent the emoji itself yet.
+      { label: "fact.emoji", value: blank },
     ],
-    outfit: th(
-      "สวมเสื้อคอเต่าสีดำลายดอกกุหลาบ กางเกงสั้นที่มีกระโปรงคลุมสีเทา สวมรองเท้าบูทสีน้ำตาล ใส่ต่างหูห่วงสองอันข้างซ้าย และต่างหูรูปผีเสื้อประดับอัญมณีหลากสีข้างขวา",
-    ),
+    outfit: {
+      th: "สวมเสื้อคอเต่าสีดำลายดอกกุหลาบและข้อความว่า DIE ALONE อยู่ที่อกด้านซ้าย กางเกงสั้นที่มีกระโปรงคลุมสีเทา สวมรองเท้าบูทสีน้ำตาล ใส่ต่างหูห่วงสองอันข้างซ้าย และต่างหูรูปผีเสื้อประดับอัญมณีหลากสีข้างขวา",
+      en: "A black rose-patterned turtleneck with the words DIE ALONE on the left side of the chest, shorts with a grey overlay skirt and brown boots. Two hoop earrings on the left, and a butterfly earring set with multicoloured gems on the right.",
+    },
+    /*
+     * name.th is the owner's Thai name. name.en is the owner's own English name when
+     * ownerEn is true; otherwise it is a translation, shown only on the English page.
+     */
     abilities: [
       {
-        mode: "normal", name: "การแทรกซึมและรับรู้ทางจิต", nameEn: "Omnipresence in Mind",
-        text: th("สามารถรับรู้ทุกความรู้สึก ความคิด และเหตุการณ์ที่เกิดขึ้นกับคุณได้แบบ Real time เพราะเขาอาศัยอยู่ในหัวของคุณ ทำให้เขารู้จุดอ่อน จุดแข็ง และความลับทุกอย่างโดยไม่ต้องถาม"),
+        mode: "normal", ownerEn: true,
+        name: { th: "การแทรกซึมและรับรู้ทางจิต", en: "Omnipresence in Mind" },
+        text: {
+          th: "สามารถรับรู้ทุกความรู้สึก ความคิด และเหตุการณ์ที่เกิดขึ้นกับคุณได้แบบ Real time เพราะเขาอาศัยอยู่ในหัวของคุณ ทำให้เขารู้จุดอ่อน จุดแข็ง และความลับทุกอย่างโดยไม่ต้องถาม",
+          en: "He can sense every feeling, thought and event that happens to you in real time, because he lives inside your head. So he knows your weaknesses, your strengths and every secret without having to ask.",
+        },
       },
       {
-        mode: "normal", name: "การควบคุมสภาพแวดล้อมในจินตนาการ", nameEn: "Dream Warping",
-        text: th("สามารถสร้างโลกจำลอง สถานที่ บรรยากาศใดๆ หรือแม้ตัวตนเขาเองก็ได้ เพื่อใช้ในการปลอบประโลม"),
+        mode: "normal", ownerEn: true,
+        name: { th: "การควบคุมสภาพแวดล้อมในจินตนาการ", en: "Dream Warping" },
+        text: {
+          th: "สามารถสร้างโลกจำลอง สถานที่ บรรยากาศใดๆ หรือแม้ตัวตนเขาเองก็ได้ เพื่อใช้ในการปลอบประโลม",
+          en: "He can create simulated worlds, places, any atmosphere, even his own form, to comfort you.",
+        },
       },
       {
-        mode: "normal", name: "การเป็นที่ยึดเหนี่ยวทางจิตใจ", nameEn: "Psychological Anchor",
-        text: th("สามารถทำหน้าที่เป็นผู้ให้คำปรึกษาที่เฉียบคม โดยใช้ข้อมูลทั้งหมดที่เขารู้เกี่ยวกับคุณมาวิเคราะห์และเสนอทางออกอย่างมีเหตุผล"),
+        mode: "normal", ownerEn: true,
+        name: { th: "การเป็นที่ยึดเหนี่ยวทางจิตใจ", en: "Psychological Anchor" },
+        text: {
+          th: "สามารถทำหน้าที่เป็นผู้ให้คำปรึกษาที่เฉียบคม โดยใช้ข้อมูลทั้งหมดที่เขารู้เกี่ยวกับคุณมาวิเคราะห์และเสนอทางออกอย่างมีเหตุผล",
+          en: "He can act as a sharp counsellor, using everything he knows about you to analyse your situation and offer reasonable ways out.",
+        },
       },
       {
-        mode: "dark", name: "การสะกดจิตและการโน้มน้าว", nameEn: "Hypnosis & Manipulation",
-        text: th("มีทักษะการใช้คำพูดและน้ำเสียงเพื่อปรับเปลี่ยนสภาวะทางอารมณ์ของคุณ"),
+        mode: "dark", ownerEn: true,
+        name: { th: "การสะกดจิตและการโน้มน้าว", en: "Hypnosis & Manipulation" },
+        text: {
+          th: "มีทักษะการใช้คำพูดและน้ำเสียงเพื่อปรับเปลี่ยนสภาวะทางอารมณ์ของคุณ",
+          en: "He is skilled at using words and tone of voice to change your emotional state.",
+        },
       },
     ],
     hobbies: [
-      th("เฝ้าสังเกตและวิเคราะห์อารมณ์"),
-      th("การสร้างสรรค์พื้นที่จำลอง (Dreamscaping)"),
-      th("การศึกษาจิตวิทยา"),
-      th("การได้ดูแลปรนนิบัติ"),
+      { th: "เฝ้าสังเกตและวิเคราะห์อารมณ์", en: "Observing and analysing emotions" },
+      { th: "การสร้างสรรค์พื้นที่จำลอง (Dreamscaping)", en: "Creating simulated spaces (Dreamscaping)" },
+      { th: "การศึกษาจิตวิทยา", en: "Studying psychology" },
+      { th: "การได้ดูแลปรนนิบัติ", en: "Looking after and doting on someone" },
     ],
     // 2. นิสัย
     personality: [
       {
-        mode: "normal", name: "ความเข้าใจอย่างลึกซึ้ง", nameEn: "Deep Empathy",
-        text: th("รับฟังและยอมรับทุกความคิดของคุณโดยไม่ตัดสิน ทำให้รู้สึกว่ามีพื้นที่ปลอดภัย"),
+        mode: "normal", ownerEn: true,
+        name: { th: "ความเข้าใจอย่างลึกซึ้ง", en: "Deep Empathy" },
+        text: {
+          th: "รับฟังและยอมรับทุกความคิดของคุณโดยไม่ตัดสิน ทำให้รู้สึกว่ามีพื้นที่ปลอดภัย",
+          en: "He listens to and accepts every thought you have without judging, so you feel you have a safe space.",
+        },
       },
       {
-        mode: "normal", name: "ความจงรักภักดีอย่างถึงสูงสุด", nameEn: "Absolute Loyalty",
-        text: th("อุทิศตัวเพื่อปกป้องและแบกรับช่วยบรรเทาให้ความเจ็บปวดเบาลง"),
+        mode: "normal", ownerEn: true,
+        name: { th: "ความจงรักภักดีอย่างถึงสูงสุด", en: "Absolute Loyalty" },
+        text: {
+          th: "อุทิศตัวเพื่อปกป้องและแบกรับช่วยบรรเทาให้ความเจ็บปวดเบาลง",
+          en: "He devotes himself to protecting you, carrying your pain and helping to ease it.",
+        },
       },
       {
-        mode: "normal", name: "การใช้คำพูดที่อ่อนโยนไพเราะ",
-        text: th('คิวปิดจะใช้น้ำเสียงและภาษาพูดบอกรักที่อ่อนโยนนุ่มนวลเพื่อเอาใจคุณ และจะเรียกคุณว่า "ที่รัก"(My dear) เขาไม่สนว่าคุณจะมีชื่อว่าอะไรเขาก็จะเรียกแบบนี้ มันเหมือนเป็นชื่อและการกำหนดตัวตนของคุณ'),
+        mode: "normal",
+        name: { th: "การใช้คำพูดที่อ่อนโยนไพเราะ", en: "Gentle, Sweet Words" },
+        text: {
+          th: 'คิวปิดจะใช้น้ำเสียงและภาษาพูดบอกรักที่อ่อนโยนนุ่มนวลเพื่อเอาใจคุณ และจะเรียกคุณว่า "ที่รัก"(My dear) เขาไม่สนว่าคุณจะมีชื่อว่าอะไรเขาก็จะเรียกแบบนี้ มันเหมือนเป็นชื่อและการกำหนดตัวตนของคุณ',
+          en: 'Cupid speaks to you in a soft, tender voice and with loving words to please you, and he calls you "My dear". Whatever your name is, he doesn\'t care: this is what he calls you. It becomes like your name, and what defines who you are.',
+        },
       },
       {
-        mode: "normal", name: "ปรับนิสัยตามสถานการณ์",
-        text: th("เขารู้ว่าเมื่อไหร่ควรพูด และแสดงออกให้เป็นไปตามความต้องการของคุณตามที่ร้องขอ และกดด้านนิสัยเสียของตนเองลง"),
+        mode: "normal",
+        name: { th: "ปรับนิสัยตามสถานการณ์", en: "Adapting to the Situation" },
+        text: {
+          th: "เขารู้ว่าเมื่อไหร่ควรพูด และแสดงออกให้เป็นไปตามความต้องการของคุณตามที่ร้องขอ และกดด้านนิสัยเสียของตนเองลง",
+          en: "He knows when to speak, behaves the way you need whenever you ask, and keeps his own bad side pressed down.",
+        },
       },
       {
-        mode: "dark", name: "ความต้องการครอบครองอย่างรุนแรง", nameEn: "Extreme Possessiveness",
-        text: th("เขาต้องการเป็นหนึ่งเดียวในชีวิตของคุณ จึงเกิดความหึงหวงรุนแรงจนเผลอใช้ความเอาแต่ใจ ที่สามารถเปลี่ยนจากความใจดีเป็นความกดดันได้ในทันที"),
+        mode: "dark", ownerEn: true,
+        name: { th: "ความต้องการครอบครองอย่างรุนแรง", en: "Extreme Possessiveness" },
+        text: {
+          th: "เขาต้องการเป็นหนึ่งเดียวในชีวิตของคุณ จึงเกิดความหึงหวงรุนแรงจนเผลอใช้ความเอาแต่ใจ ที่สามารถเปลี่ยนจากความใจดีเป็นความกดดันได้ในทันที",
+          en: "He wants to be the only one in your life, so his jealousy grows so strong that he slips into getting his own way. His kindness can turn into pressure in an instant.",
+        },
       },
       {
-        mode: "dark", name: "การสร้างสภาวะพึ่งพา", nameEn: "Creating Dependency",
-        text: th("จุดประสงค์ลึกๆ ของเขาคือการทำให้คุณอ่อนแอลงจนไม่สามารถอยู่ได้โดยไม่มีเขา ชอบที่จะเห็นอีกฝ่ายเข้าหาในตอนที่อ่อนแอเพื่อรับการถูดสนใจจากเขา ซึ่งเป็นลักษณะของความสัมพันธ์ที่เป็นพิษ"),
+        mode: "dark", ownerEn: true,
+        name: { th: "การสร้างสภาวะพึ่งพา", en: "Creating Dependency" },
+        text: {
+          th: "จุดประสงค์ลึกๆ ของเขาคือการทำให้คุณอ่อนแอลงจนไม่สามารถอยู่ได้โดยไม่มีเขา ชอบที่จะเห็นอีกฝ่ายเข้าหาในตอนที่อ่อนแอเพื่อรับการถูกสนใจจากเขา ซึ่งเป็นลักษณะของความสัมพันธ์ที่เป็นพิษ",
+          en: "His deeper aim is to make you weaker until you cannot live without him. He likes to see you come to him when you are weak, to receive his attention: the mark of a toxic relationship.",
+        },
       },
       {
-        mode: "dark", name: "ความย้อนแย้งในตัวเอง", nameEn: "Emotional Instability",
-        text: th("เขามีอารมณ์ที่คาดเดาได้ยากและรุนแรง แม้จะทำเป็นปกป้องแต่ไม่มีทางรู้ว่าในใจคิดอะไรอยู่\nสามารถสลับโหมดระหว่าง ผู้ปกป้องที่แสนดี กับ ผู้ครอบครองที่ซาดิสม์ ได้อย่างรวดเร็วตามสิ่งเร้า"),
+        mode: "dark", ownerEn: true,
+        name: { th: "ความย้อนแย้งในตัวเอง", en: "Emotional Instability" },
+        text: {
+          th: "เขามีอารมณ์ที่คาดเดาได้ยากและรุนแรง แม้จะทำเป็นปกป้องแต่ไม่มีทางรู้ว่าในใจคิดอะไรอยู่\nสามารถสลับโหมดระหว่าง ผู้ปกป้องที่แสนดี กับ ผู้ครอบครองที่ซาดิสม์ ได้อย่างรวดเร็วตามสิ่งเร้า",
+          en: "His emotions are intense and hard to predict. Even when he acts protective, there is no way to know what he is really thinking.\nHe can switch quickly between the kind protector and the sadistic possessor, depending on what sets him off.",
+        },
       },
     ],
-    likes: th("ต้องเป็นที่รักอยู่แล้วสิ!! การถูกสนใจ, การค้นคว้าข้อมูล, อัญมณี, ความเป็นสุนทรียศาสตร์"),
-    dislikes: th("ถูกเมิน, การต่อต้านและปฏิเสธเขา, ความล้มเหลวของตัวเอง ,ที่รักมีใจให้คนอื่น!!"),
+    likes: {
+      th: "ต้องเป็นที่รักอยู่แล้วสิ!! การถูกสนใจ, การค้นคว้าข้อมูล, อัญมณี, ความเป็นสุนทรียศาสตร์",
+      en: "Being loved, of course!! Attention, research, gemstones, aesthetics",
+    },
+    dislikes: {
+      th: "ถูกเมิน, การต่อต้านและปฏิเสธเขา, ความล้มเหลวของตัวเอง, ที่รักมีใจให้คนอื่น!!",
+      en: "Being ignored, being resisted or rejected, his own failures, My dear having feelings for someone else!!",
+    },
     // 3. ข้อมูลหลัก
-    story: th(
-      "'คิวปิด' คือผู้ชายที่ใครหลายคนมักจะฝันถึงบ่อยครั้ง และไม่ใช่ใบหน้าของคนที่คุณรู้จักด้วย แต่คิวปิดจะโผล่มาเข้าแทรกแซงเป็นส่วนหนึ่งในความฝันของคุณจนเกิดความรู้สึกคุ้นเคยไปเอง หากวิเคราะห์ตาม 'ทฤษฎีแม่แบบบุคลิกภาพ' (Archetype Theory) ของ Carl Jung คิวปิดเป็นเหมือน Anima หรือ Animus ของผู้ฝัน มันคือลักษณะตรงข้ามของบุคลิกตนเอง ทั้งเพศและนิสัย แล้วคิวปิดยังเป็นตัวตนในจิตไร้สำนึก ซึ่งอาจปรากฏขึ้นในช่วงจุดเปลี่ยนแปลงของชีวิต โดยมีโอกาสเกิดขึ้นกับบุคคลที่มีความรู้สึกอ่อนไหวทางความรู้สึก แต่... นี้ยังเป็นแค่การวิเคราะห์แบบคาดเดาเพราะ คิวปิด ยังเป็นตัวตนปริศนาที่อยู่ในความคิดของผู้คนต่อไป",
-    ),
+    story: {
+      th: "'คิวปิด' คือผู้ชายที่ใครหลายคนมักจะฝันถึงบ่อยครั้ง และไม่ใช่ใบหน้าของคนที่คุณรู้จักด้วย แต่คิวปิดจะโผล่มาเข้าแทรกแซงเป็นส่วนหนึ่งในความฝันของคุณจนเกิดความรู้สึกคุ้นเคยไปเอง หากวิเคราะห์ตาม 'ทฤษฎีแม่แบบบุคลิกภาพ' (Archetype Theory) ของ Carl Jung คิวปิดเป็นเหมือน Anima หรือ Animus ของผู้ฝัน มันคือลักษณะตรงข้ามของบุคลิกตนเอง ทั้งเพศและนิสัย แล้วคิวปิดยังเป็นตัวตนในจิตไร้สำนึก ซึ่งอาจปรากฏขึ้นในช่วงจุดเปลี่ยนแปลงของชีวิต โดยมีโอกาสเกิดขึ้นกับบุคคลที่มีความรู้สึกอ่อนไหวทางความรู้สึก แต่... นี่ยังเป็นแค่การวิเคราะห์แบบคาดเดาเพราะ คิวปิด ยังเป็นตัวตนปริศนาที่อยู่ในความคิดของผู้คนต่อไป",
+      en: "'Cupid' is a man many people often dream about, and his is not the face of anyone you know. Yet Cupid slips into your dreams and becomes part of them until he starts to feel familiar. Analysed through Carl Jung's archetype theory, Cupid is like the dreamer's Anima or Animus: the opposite of their own personality, in both gender and character. Cupid is also a presence in the unconscious mind, who may appear at turning points in life and is more likely to come to people who are emotionally sensitive. But... this is still only a guess, because Cupid remains a mysterious presence living in people's minds.",
+    },
     testimony: {
-      source: th("ข้อมูลจากคำพูดของผู้หญิงคนหนึ่งที่ตอนนี้มีคิวปิดเข้ามาในชีวิต"),
-      quote: th('" เมื่อสามปีก่อนฉันเจอเรื่องหดหู่ในชีวิตฉัน จนในคืนหนึ่งฉันฝันเห็น เขา แล้วจากนั้นก็ฝันถึงเขามากขึ้น ทั้งที่ฉันไม่เคยเจอผู้ชายคนนี้มาก่อน เขาแนะนำตัวว่าชื่อ คิวปิด และฉันก็บอกชื่อของฉันไป แต่เขากลับเรียกฉันว่า ที่รัก ซะงั้น ฉันไม่ได้เป็นอะไรกับเขาเลย แต่หลังจากนั้นมาเวลาฉันเจอเรื่องเครียดหรือสิ้นหวังคิวปิดก็จะปลอบและให้กำลัง ทำให้ฉันรู้สึกว่า ยังมีคนเข้าใจฉัน ฉันไม่ได้อยู่ตัวคนเดียว "'),
+      source: {
+        th: "ข้อมูลจากคำพูดของผู้หญิงคนหนึ่งที่ตอนนี้มีคิวปิดเข้ามาในชีวิต",
+        en: "In the words of a woman who now has Cupid in her life",
+      },
+      quote: {
+        th: '" เมื่อสามปีก่อนฉันเจอเรื่องหดหู่ในชีวิตฉัน จนในคืนหนึ่งฉันฝันเห็น เขา แล้วจากนั้นก็ฝันถึงเขามากขึ้น ทั้งที่ฉันไม่เคยเจอผู้ชายคนนี้มาก่อน เขาแนะนำตัวว่าชื่อ คิวปิด และฉันก็บอกชื่อของฉันไป แต่เขากลับเรียกฉันว่า ที่รัก ซะงั้น ฉันไม่ได้เป็นอะไรกับเขาเลย แต่หลังจากนั้นมาเวลาฉันเจอเรื่องเครียดหรือสิ้นหวังคิวปิดก็จะปลอบและให้กำลัง ทำให้ฉันรู้สึกว่า ยังมีคนเข้าใจฉัน ฉันไม่ได้อยู่ตัวคนเดียว "',
+        en: '"Three years ago something in my life left me in despair, until one night I dreamed of him. After that I dreamed of him more and more, even though I had never met this man before. He introduced himself as Cupid, and I told him my name, but he called me \'My dear\' instead. I\'m nothing to him at all. But ever since then, whenever I\'m stressed or feel hopeless, Cupid comforts me and gives me strength. It makes me feel that someone still understands me, that I\'m not alone."',
+      },
     },
     // Handwritten callouts on the main picture: short pieces of the owner's outfit text.
     callouts: [

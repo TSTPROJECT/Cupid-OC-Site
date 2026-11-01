@@ -147,7 +147,6 @@ window.CUPID_UI = {
     "profile.abilities": "Abilities",
     "profile.personality": "Personality",
     "profile.darkBadge": "Dark mode",
-    "profile.thaiOnly": "Cupid's details are written by the owner in Thai and shown here as written.",
     "diary.kicker": "The notebook",
     "diary.heading": "Cupid's Diary",
     "diary.hintDesk": "Click a page corner, drag a page, or use the arrow keys",

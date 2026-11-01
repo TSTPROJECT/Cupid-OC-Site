@@ -5,6 +5,15 @@ window.CupidSections = (function () {
   // A row or card the owner marked "Dark mode" (only ever built in Dark mode).
   const darkBadge = () => `<span class="dark-badge">❗️ ${esc(ui("profile.darkBadge"))}</span>`;
 
+  /*
+   * Under each name: the English page shows the owner's Thai name; the Thai page shows the
+   * owner's own English name, but not a translation the owner didn't write.
+   */
+  function subName(it) {
+    if (window.Cupid.state.lang === "en") return `<p class="trait__en" lang="th">${esc(it.name.th)}</p>`;
+    return it.ownerEn ? `<p class="trait__en" lang="en">${esc(it.name.en)}</p>` : "";
+  }
+
   function traits(id, list) {
     const items = list
       .filter(isVisible)
@@ -12,8 +21,8 @@ window.CupidSections = (function () {
         (it) => `
         <li class="trait${it.mode === "dark" ? " trait--dark" : ""}">
           ${it.mode === "dark" ? darkBadge() : ""}
-          <h4 class="trait__name" lang="th">${esc(it.name)}</h4>
-          ${it.nameEn ? `<p class="trait__en" lang="en">${esc(it.nameEn)}</p>` : ""}
+          <h4 class="trait__name">${esc(txt(it.name))}</h4>
+          ${subName(it)}
           <p class="trait__text">${t(it.text)}</p>
         </li>`,
       )
@@ -63,8 +72,6 @@ window.CupidSections = (function () {
     const callouts = P.callouts
       .map((c) => `<span class="callout" style="--x:${c.x};--y:${c.y}"><span>${esc(txt(c.text))}</span></span>`)
       .join("");
-    // Only the English page needs to say why the details are in Thai.
-    const thaiOnly = window.Cupid.state.lang === "en" ? ui("profile.thaiOnly") : "";
 
     let secret = "";
     if (isVisible(P.secret) && img(P.secret.image)) {
@@ -94,7 +101,6 @@ window.CupidSections = (function () {
           <p class="kicker">${esc(ui("profile.kicker"))}</p>
           <h1 class="profile__name">${esc(P.name)}</h1>
           <p class="profile__name-alt hand" lang="th">${esc(P.nameTh)}</p>
-          ${thaiOnly ? `<p class="profile__note">${esc(thaiOnly)}</p>` : ""}
           <section class="index-card" aria-labelledby="facts-title">
             <h3 id="facts-title" class="card-title">${esc(ui("profile.facts"))}</h3>
             <dl class="facts">${facts}</dl>

@@ -107,10 +107,11 @@ To add or replace art: put the original in `assets-src/drive/`, add it to `SLUGS
 ## Character text
 
 The profile (basic information, outfit, abilities, hobbies, personality, likes, dislikes, main information and
-the woman's quote) is the owner's own Thai text, copied without changes — including spelling. The owner wrote
-it in Thai only, so the English page shows the same Thai words with a short note; add an `en` only with the
-owner's own English. Items the owner marked "Dark mode" (one ability, three personality traits, the emoji) have
-`mode: "dark"`.
+the woman's quote) is the owner's own Thai text. Only three spelling slips were fixed (ถูด→ถูก, นี้→นี่, and the
+comma in " ,ที่รัก"). The English was translated for this site at the owner's request. Names the owner gave in
+English (e.g. "Omnipresence in Mind") are the owner's; the two traits without one ("Gentle, Sweet Words",
+"Adapting to the Situation") have translated names that only show on the English page. Items the owner marked
+"Dark mode" (one ability, three personality traits) have `mode: "dark"`.
 
 The relationship card for ที่รัก ("My dear", the owner's words) has an appearance description written from the
 owner's two reference pictures (a 3D avatar and a chibi pair). The reference pictures are not on the site.
@@ -120,8 +121,7 @@ The entrance shows an 18+ content warning; opening the diary counts as confirmin
 ## Still needed from the owner
 
 - Which photos are Dark-mode only (the red-circled reference)
-- The Dark-mode emoji (the profile shows a blank for it in Dark mode)
-- English versions of the character text, if wanted
+- The emoji (the profile shows a blank for it in both modes)
 - Diary entry texts and dates
 - Relationship type and description for ที่รัก (empty fields are simply not shown on the card)
 - Character owner name and special thanks for the credits
