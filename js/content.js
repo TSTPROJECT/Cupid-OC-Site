@@ -37,23 +37,23 @@ window.CUPID_CONTENT = (function () {
     },
     "rapizran-cake-card": {
       w: 1162, h: 1068, artist: "RapiZRAN", mode: "normal",
-      alt: { th: "คิวปิดจิบิในเค้กสตรอว์เบอร์รี", en: "Chibi Cupid tucked inside a strawberry cake" },
+      alt: { th: "คิวปิดจิบิในแพนเค้ก", en: "Chibi Cupid in a pancake" },
     },
     "rapizran-cake": {
       w: 1162, h: 1068, artist: "RapiZRAN", mode: "normal", cutout: true,
-      alt: { th: "สติกเกอร์คิวปิดในเค้ก", en: "Cake sticker of Cupid" },
+      alt: { th: "คิวปิดจิบิในแพนเค้ก", en: "Chibi Cupid in a pancake" },
     },
     "kanok-duo-a": {
       w: 1800, h: 1800, artist: "PpAws Kanok", mode: "normal", cutout: true,
-      alt: { th: "คิวปิดยื่นของให้อีกคนหนึ่ง", en: "Cupid handing something to a companion" },
+      alt: { th: "คิวปิดยิงศรรักใส่ที่รัก", en: "Cupid shooting a love arrow at My dear" },
     },
     "kanok-duo-b": {
       w: 1800, h: 1800, artist: "PpAws Kanok", mode: "normal", cutout: true,
-      alt: { th: "คิวปิดกับคนสำคัญ แบบสติกเกอร์", en: "Sticker of Cupid with a companion" },
+      alt: { th: "คิวปิดยิงศรรักใส่ที่รัก", en: "Cupid shooting a love arrow at My dear" },
     },
     "kanok-heart": {
       w: 1800, h: 1800, artist: "PpAws Kanok", mode: "normal", cutout: true,
-      alt: { th: "คิวปิดกับคนสำคัญในกรอบหัวใจ", en: "Cupid and a companion inside a heart frame" },
+      alt: { th: "คิวปิดยิงศรรักใส่ที่รัก", en: "Cupid shooting a love arrow at My dear" },
     },
     // ---- dark mode only (provisional, see note at the top) ----
     "emakai-heart": {
