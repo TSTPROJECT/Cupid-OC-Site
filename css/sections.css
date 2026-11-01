@@ -670,8 +670,9 @@
 
 .artists {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 22px 16px;
+  /* wide enough for 5 overlapping circles (3 pictures, +N, lock) without squeezing */
+  grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
+  gap: 32px 20px;
 }
 .artist {
   text-align: center;
@@ -682,19 +683,21 @@
 .artist__thumbs {
   display: flex;
   justify-content: center;
-  min-height: 72px;
+  min-height: 68px;
+  padding-inline: 4px;
 }
 .artist__thumbs .art,
 .artist__locked,
 .artist__more {
-  width: 60px;
-  height: 60px;
+  flex: none;
+  width: 56px;
+  height: 56px;
   object-fit: cover;
   border: 3px solid var(--paper);
   border-radius: 50%;
   box-shadow: var(--shadow-1);
   background: var(--bg-2);
-  margin-left: -16px;
+  margin-left: -14px;
 }
 .artist__thumbs > :first-child {
   margin-left: 0;
