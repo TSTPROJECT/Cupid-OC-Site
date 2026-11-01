@@ -502,7 +502,7 @@
 .rel-card {
   position: relative;
   background: var(--paper);
-  padding: 16px 16px 22px;
+  padding: 16px 16px 40px;
   box-shadow: var(--shadow-2);
   transition: transform 0.4s var(--ease), box-shadow 0.4s;
 }
@@ -558,35 +558,10 @@
 .sticker--card {
   width: 54px;
   height: 50px;
-  right: -14px;
-  bottom: -12px;
+  right: -16px;
+  bottom: -26px;
   transform: rotate(12deg);
 }
-.rel-card--empty {
-  display: grid;
-  place-items: center;
-  align-content: center;
-  gap: 10px;
-  min-height: 320px;
-  background: transparent;
-  box-shadow: none;
-  border: 1.5px dashed var(--line-strong);
-  text-align: center;
-  color: var(--ink-3);
-}
-.rel-card--empty:hover {
-  transform: none;
-}
-.rel-card__frame svg {
-  width: 56px;
-  height: 52px;
-  color: var(--accent);
-}
-.rel-card__hint {
-  font-size: 0.85rem;
-  font-family: ui-monospace, Consolas, monospace;
-}
-
 /* ---------- credits ---------- */
 .credits {
   position: relative;

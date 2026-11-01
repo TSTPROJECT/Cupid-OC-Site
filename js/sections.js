@@ -115,8 +115,7 @@ window.CupidSections = (function () {
       <section class="notes" aria-label="${esc(ui("profile.notes"))}">
         <ul class="notes__list">${notes}</ul>
       </section>
-      <section class="story reveal" aria-labelledby="story-title">
-        <h3 id="story-title" class="card-title card-title--center">${esc(ui("profile.story"))}</h3>
+      <section class="story reveal">
         <p class="story__text">${t(P.story)}</p>
         <figure class="testimony tilt-r">
           <span class="tape tape--top" aria-hidden="true"></span>
@@ -129,6 +128,7 @@ window.CupidSections = (function () {
   }
 
   function relationships() {
+    // Only what the owner has written is shown; empty fields are left out rather than marked as blanks.
     const cards = C.RELATIONSHIPS.filter(isVisible)
       .map(
         (r, i) => `
@@ -136,24 +136,16 @@ window.CupidSections = (function () {
           <span class="tape tape--top" aria-hidden="true"></span>
           <figure class="rel-card__photo">${img(r.image, { sizes: "(max-width: 860px) 80vw, 340px" })}</figure>
           <div class="rel-card__body">
-            <p class="rel-card__type"><span class="label">${esc(ui("rel.type"))}</span> ${t(r.type)}</p>
+            ${txt(r.type) ? `<p class="rel-card__type"><span class="label">${esc(ui("rel.type"))}</span> ${t(r.type)}</p>` : ""}
             <h3 class="rel-card__name">${t(r.name)}</h3>
-            ${r.appearance ? `<p class="rel-card__looks"><span class="label">${esc(ui("rel.looks"))}</span> ${t(r.appearance)}</p>` : ""}
-            <p class="rel-card__desc">${t(r.description, { block: true })}</p>
+            ${txt(r.appearance) ? `<p class="rel-card__looks"><span class="label">${esc(ui("rel.looks"))}</span> ${t(r.appearance)}</p>` : ""}
+            ${txt(r.description) ? `<p class="rel-card__desc">${t(r.description)}</p>` : ""}
           </div>
           ${r.sticker ? `<span class="sticker sticker--card" aria-hidden="true">${icon.heart}</span>` : ""}
         </li>`,
       )
       .join("");
-    return `
-      <ul class="rel-grid">
-        ${cards}
-        <li class="rel-card rel-card--empty">
-          <span class="rel-card__frame" aria-hidden="true">${icon.heartLine}</span>
-          <p class="hand">${esc(ui("rel.empty"))}</p>
-          <p class="rel-card__hint">${esc(ui("rel.emptyHint"))}</p>
-        </li>
-      </ul>`;
+    return `<ul class="rel-grid">${cards}</ul>`;
   }
 
   function credits() {

@@ -123,5 +123,5 @@ The entrance shows an 18+ content warning; opening the diary counts as confirmin
 - The Dark-mode emoji (the profile shows a blank for it in Dark mode)
 - English versions of the character text, if wanted
 - Diary entry texts and dates
-- Relationship type and description for ที่รัก
+- Relationship type and description for ที่รัก (empty fields are simply not shown on the card)
 - Character owner name and special thanks for the credits
