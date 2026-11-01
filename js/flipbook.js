@@ -109,6 +109,7 @@ window.CupidFlipbook = function (root, opts) {
     setShift(shiftFor(target));
     turning = { dir, target, progress: 0 };
     draw(0);
+    if (opts.onTurn) opts.onTurn(dir);
     return turning;
   }
 

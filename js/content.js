@@ -215,5 +215,15 @@ window.CUPID_CONTENT = (function () {
     ],
   };
 
-  return { IMAGES, PROFILE, DIARY, RELATIONSHIPS, CREDITS };
+  /*
+   * Music. Leave null to use the built-in music box (Light) and dark lullaby (Dark),
+   * which are generated in the browser. To use the owner's own songs instead, put the
+   * files in assets/audio/ and write their paths here, e.g. "assets/audio/light.mp3".
+   * Only use music the owner has the rights to.
+   */
+  const AUDIO = {
+    music: { light: null, dark: null },
+  };
+
+  return { IMAGES, PROFILE, DIARY, RELATIONSHIPS, CREDITS, AUDIO };
 })();

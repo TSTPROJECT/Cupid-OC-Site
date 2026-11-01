@@ -555,6 +555,16 @@ svg.ico-line {
   .seg {
     padding: 6px 9px;
   }
+  .controls {
+    gap: 6px;
+  }
+  .site-header .icon-btn {
+    width: 40px;
+    height: 40px;
+  }
+  .site-header {
+    padding: 0 12px;
+  }
 }
 
 /* ---------- sections ---------- */
@@ -667,11 +677,52 @@ svg.ico-line {
 :root[data-theme="dark"] .entrance {
   background: radial-gradient(ellipse at 50% 40%, rgba(255, 0, 87, 0.08), transparent 60%), var(--bg);
 }
-.entrance__lang {
+.entrance__tools {
   position: absolute;
   top: 16px;
   right: 16px;
   z-index: 2;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.sound-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 42px;
+  padding: 4px 14px 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--paper);
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--ink-2);
+}
+.sound-pill__icon,
+.sound-btn {
+  display: inline-grid;
+  place-items: center;
+}
+.sound-pill__icon svg {
+  width: 20px;
+  height: 20px;
+}
+.sound-pill[aria-pressed="false"],
+.sound-btn[aria-pressed="false"] {
+  color: var(--ink-3);
+}
+.sound-btn {
+  width: 42px;
+  height: 42px;
+}
+.sound-btn[aria-pressed="true"] svg path:last-child {
+  animation: sound-wave 2.4s ease-in-out infinite;
+}
+@keyframes sound-wave {
+  50% {
+    opacity: 0.35;
+  }
 }
 .entrance__scene {
   perspective: 2200px;

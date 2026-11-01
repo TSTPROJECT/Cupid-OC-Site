@@ -33,6 +33,7 @@ window.CupidLightbox = (function () {
         <button type="button" class="icon-btn lightbox__close" data-close aria-label="${esc(ui("lightbox.close"))}">${window.Cupid.icon.close}</button>
       </figure>`;
     document.documentElement.classList.add("has-lightbox");
+    if (window.CupidAudio) window.CupidAudio.sfx.zoom();
     d.showModal();
     d.querySelector("[data-close]").focus();
   }

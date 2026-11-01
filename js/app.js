@@ -26,6 +26,16 @@
       b.querySelector(".theme-btn__icon").innerHTML = dark ? icon.sun : icon.moon;
       b.querySelector(".theme-btn__text").textContent = ui(dark ? "theme.light" : "theme.dark");
     });
+    const soundOn = window.CupidAudio.enabled;
+    $$("[data-sound-toggle]").forEach((b) => {
+      b.hidden = !window.CupidAudio.supported;
+      b.setAttribute("aria-pressed", String(soundOn));
+      b.setAttribute("aria-label", ui(soundOn ? "sound.turnOff" : "sound.turnOn"));
+      const iconEl = b.querySelector(".sound-pill__icon") || b;
+      iconEl.innerHTML = soundOn ? icon.soundOn : icon.soundOff;
+      const text = b.querySelector(".sound-pill__text");
+      if (text) text.textContent = ui(soundOn ? "sound.on" : "sound.off");
+    });
     $("#diary-hint").textContent = ui(coarse.matches ? "diary.hintTouch" : "diary.hintDesk");
     const meta = $('meta[name="theme-color"]');
     if (meta) meta.setAttribute("content", dark ? "#1c1b1e" : "#f0e7db");
@@ -70,11 +80,14 @@
     if (lang === state.lang) return;
     state.lang = lang;
     store.set("cupid.lang", lang);
+    window.CupidAudio.sfx.tick();
     keepingScroll(renderAll);
   }
 
   function setTheme(theme, fromEl) {
     if (theme === state.theme) return;
+    window.CupidAudio.sfx.theme(theme === "dark");
+    window.CupidAudio.setMode(theme);
     const apply = () => {
       state.theme = theme;
       doc.dataset.theme = theme;
@@ -118,6 +131,7 @@
       $("#book-first").hidden = s.atStart;
     },
     onZoom: (key) => window.CupidLightbox.open(key),
+    onTurn: () => window.CupidAudio.sfx.page(),
   });
   $("#book-prev").addEventListener("click", () => book.prev());
   $("#book-next").addEventListener("click", () => book.next());
@@ -143,6 +157,14 @@
   // ---------- controls ----------
 
   $$("[data-lang]").forEach((b) => b.addEventListener("click", () => setLang(b.dataset.lang)));
+  $$("[data-sound-toggle]").forEach((b) =>
+    b.addEventListener("click", () => {
+      window.CupidAudio.setEnabled(!window.CupidAudio.enabled);
+      window.CupidAudio.start(state.theme);
+      window.CupidAudio.sfx.tick();
+      applyStatic();
+    }),
+  );
   $$("[data-theme-toggle]").forEach((b) =>
     b.addEventListener("click", () => setTheme(state.theme === "dark" ? "light" : "dark", b)),
   );
@@ -212,6 +234,9 @@
   function closeEntrance() {
     if (!entrance || entrance.classList.contains("is-opening")) return;
     entrance.classList.add("is-opening");
+    // the click on "Open the diary" is what lets the browser play sound
+    window.CupidAudio.start(state.theme);
+    window.CupidAudio.sfx.open();
     behind.forEach((el) => (el.inert = false));
     doc.classList.remove("has-entrance");
     const done = () => {

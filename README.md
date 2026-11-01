@@ -60,6 +60,19 @@ Note: this is a static site, so the dark image files still exist on the server. 
 URL can open it directly. Real access control would need a server, which this project deliberately does
 not have.
 
+## Music and sound
+
+`js/audio.js` makes all sound in the browser with the Web Audio API — no audio files, nothing to license.
+
+- Light mode: a music-box waltz in F major. Dark mode: the same melody in D minor, slower and slightly
+  out of tune, with a low drone and a heartbeat. Switching theme crossfades between them (about 2 s).
+- Effects: diary opening, page turn, theme switch, photo viewer, language switch.
+- Browsers block sound until the visitor clicks, so music starts on "Open the diary". The speaker button
+  (header, and on the entrance) mutes everything; the choice is remembered. Music pauses when the tab is hidden.
+- To use the owner's own songs instead, put them in `assets/audio/` and set `AUDIO.music.light` / `.dark`
+  in `js/content.js`. Only use music the owner has the rights to.
+- `CupidAudio.status` in the browser console shows whether sound is running and which piece is playing.
+
 ## Artwork
 
 13 images from the client's Google Drive folder `[OC website] Cupid`. The artist is taken from each file name

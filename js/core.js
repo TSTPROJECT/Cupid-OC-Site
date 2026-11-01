@@ -93,6 +93,8 @@ window.Cupid = (function () {
     menu: '<svg viewBox="0 0 24 24" aria-hidden="true" class="ico-line"><path d="M4 7h16M4 12h16M4 17h10"/></svg>',
     butterfly: '<svg viewBox="0 0 40 32" aria-hidden="true" class="ico-line"><path d="M20 8v20M20 12c-3-7-11-11-15-8s0 11 7 11c-6 1-8 8-3 10s9-5 11-9M20 12c3-7 11-11 15-8s0 11-7 11c6 1 8 8 3 10s-9-5-11-9M20 8l-3-5M20 8l3-5"/></svg>',
     star: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.2 7.3 7.3 2.2-7.3 2.2L12 20.5l-2.2-7.3L2.5 11l7.3-2.2z"/></svg>',
+    soundOn: '<svg viewBox="0 0 24 24" aria-hidden="true" class="ico-line"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6M18.2 6.4a8 8 0 0 1 0 11.2"/></svg>',
+    soundOff: '<svg viewBox="0 0 24 24" aria-hidden="true" class="ico-line"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></svg>',
     lock: '<svg viewBox="0 0 24 24" aria-hidden="true" class="ico-line"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>',
   };
 
