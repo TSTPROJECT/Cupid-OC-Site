@@ -512,7 +512,7 @@
   border: 0;
   background: none;
   padding: 0.42em 0;
-  cursor: pointer;
+  cursor: var(--cur-link);
   text-align: left;
   color: var(--pg-ink);
   font-size: 1.05em;
