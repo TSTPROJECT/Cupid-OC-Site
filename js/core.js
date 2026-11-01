@@ -46,7 +46,12 @@ window.Cupid = (function () {
   /** Escaped HTML for a content field, or a clearly marked blank waiting for the owner. */
   function t(field, opts) {
     const s = txt(field);
-    if (s) return esc(s).replace(/\n/g, "<br>");
+    if (s) {
+      const html = esc(s).replace(/\n/g, "<br>");
+      // Shown in the other language because the owner wrote only one: mark it for fonts and screen readers.
+      const other = state.lang === "th" ? "en" : "th";
+      return typeof field === "object" && !field[state.lang] ? `<span lang="${other}">${html}</span>` : html;
+    }
     if (opts && opts.block) return `<span class="tbd tbd--block">${esc(ui("tbd.long"))}</span>`;
     return `<span class="tbd">${esc(ui("tbd"))}</span>`;
   }

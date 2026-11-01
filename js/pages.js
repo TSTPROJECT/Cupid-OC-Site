@@ -76,16 +76,15 @@ window.CupidPages = (function () {
 
     about(p) {
       const facts = C.PROFILE.facts
+        .filter((f) => f.book && isVisible(f))
         .map(
-          (f) => `<li><span class="form__label">${esc(ui(f.label))}</span><span class="form__value">${t(f.value)}</span></li>`,
+          (f) =>
+            `<li><span class="form__label">${esc(ui(f.label))}</span><span class="form__value${f.label === "fact.name" ? " hand" : ""}">${t(f.value)}</span></li>`,
         )
         .join("");
       return `
         <h3 class="page-title">${t(p.title)}</h3>
-        <ul class="form">
-          <li><span class="form__label">${esc(ui("fact.name"))}</span><span class="form__value hand">${esc(C.PROFILE.name)}</span></li>
-          ${facts}
-        </ul>
+        <ul class="form">${facts}</ul>
         <div class="swatches" aria-hidden="true">
           ${C.PROFILE.palette.map((c) => `<span style="--c:${c.hex}"></span>`).join("")}
         </div>`;

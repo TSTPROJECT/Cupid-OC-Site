@@ -2,10 +2,40 @@
 window.CupidSections = (function () {
   const { C, esc, ui, txt, t, img, icon, isVisible } = window.Cupid;
 
+  // A row or card the owner marked "Dark mode" (only ever built in Dark mode).
+  const darkBadge = () => `<span class="dark-badge">❗️ ${esc(ui("profile.darkBadge"))}</span>`;
+
+  function traits(id, list) {
+    const items = list
+      .filter(isVisible)
+      .map(
+        (it) => `
+        <li class="trait${it.mode === "dark" ? " trait--dark" : ""}">
+          ${it.mode === "dark" ? darkBadge() : ""}
+          <h4 class="trait__name" lang="th">${esc(it.name)}</h4>
+          ${it.nameEn ? `<p class="trait__en" lang="en">${esc(it.nameEn)}</p>` : ""}
+          <p class="trait__text">${t(it.text)}</p>
+        </li>`,
+      )
+      .join("");
+    return `
+      <section class="traits reveal" aria-labelledby="${id}-title">
+        <h3 id="${id}-title" class="card-title card-title--center">${esc(ui("profile." + id))}</h3>
+        <ul class="traits__list">${items}</ul>
+      </section>`;
+  }
+
   function profile() {
     const P = C.PROFILE;
     const facts = P.facts
-      .map((f) => `<div class="facts__row"><dt>${esc(ui(f.label))}</dt><dd>${t(f.value)}</dd></div>`)
+      .filter(isVisible)
+      .map(
+        (f) => `
+        <div class="facts__row${f.mode === "dark" ? " facts__row--dark" : ""}">
+          <dt>${esc(ui(f.label))}</dt>
+          <dd${f.label === "fact.name" ? ' class="hand"' : ""}>${t(f.value)}${f.mode === "dark" ? darkBadge() : ""}</dd>
+        </div>`,
+      )
       .join("");
     const chips = P.palette
       .map(
@@ -17,18 +47,24 @@ window.CupidSections = (function () {
         </li>`,
       )
       .join("");
-    const notes = P.notes
+    const notes = [
+      { label: "note.hobbies", html: `<ul class="sticky__list">${P.hobbies.map((h) => `<li>${t(h)}</li>`).join("")}</ul>` },
+      { label: "note.likes", html: `<p>${t(P.likes)}</p>` },
+      { label: "note.dislikes", html: `<p>${t(P.dislikes)}</p>` },
+    ]
       .map(
         (n, i) => `
         <li class="sticky sticky--${i % 4}">
           <h4>${esc(ui(n.label))}</h4>
-          <p>${t(n.value)}</p>
+          ${n.html}
         </li>`,
       )
       .join("");
     const callouts = P.callouts
       .map((c) => `<span class="callout" style="--x:${c.x};--y:${c.y}"><span>${esc(txt(c.text))}</span></span>`)
       .join("");
+    // Only the English page needs to say why the details are in Thai.
+    const thaiOnly = window.Cupid.state.lang === "en" ? ui("profile.thaiOnly") : "";
 
     let secret = "";
     if (isVisible(P.secret) && img(P.secret.image)) {
@@ -38,7 +74,6 @@ window.CupidSections = (function () {
           <div class="secret__text">
             <p class="kicker kicker--dark">${icon.lock} ${esc(ui("profile.secretKicker"))}</p>
             <h3 id="secret-title" class="secret__title">${t(P.secret.title)}</h3>
-            <p>${t(P.secret.text, { block: true })}</p>
           </div>
         </aside>`;
     }
@@ -59,13 +94,15 @@ window.CupidSections = (function () {
           <p class="kicker">${esc(ui("profile.kicker"))}</p>
           <h1 class="profile__name">${esc(P.name)}</h1>
           <p class="profile__name-alt hand" lang="th">${esc(P.nameTh)}</p>
-          <div class="lede">${t(P.intro, { block: true })}</div>
+          ${thaiOnly ? `<p class="profile__note">${esc(thaiOnly)}</p>` : ""}
           <section class="index-card" aria-labelledby="facts-title">
             <h3 id="facts-title" class="card-title">${esc(ui("profile.facts"))}</h3>
-            <dl class="facts">
-              <div class="facts__row"><dt>${esc(ui("fact.name"))}</dt><dd class="hand">${esc(P.name)}</dd></div>
-              ${facts}
-            </dl>
+            <dl class="facts">${facts}</dl>
+          </section>
+          <section class="outfit" aria-labelledby="outfit-title">
+            <span class="tape tape--top" aria-hidden="true"></span>
+            <h3 id="outfit-title" class="card-title">${esc(ui("profile.outfit"))}</h3>
+            <p>${t(P.outfit)}</p>
           </section>
           <section aria-labelledby="palette-title">
             <h3 id="palette-title" class="card-title">${esc(ui("profile.palette"))}</h3>
@@ -73,9 +110,20 @@ window.CupidSections = (function () {
           </section>
         </div>
       </div>
-      <section class="notes" aria-labelledby="notes-title">
-        <h3 id="notes-title" class="card-title card-title--center">${esc(ui("profile.notes"))}</h3>
+      ${traits("abilities", P.abilities)}
+      ${traits("personality", P.personality)}
+      <section class="notes" aria-label="${esc(ui("profile.notes"))}">
         <ul class="notes__list">${notes}</ul>
+      </section>
+      <section class="story reveal" aria-labelledby="story-title">
+        <h3 id="story-title" class="card-title card-title--center">${esc(ui("profile.story"))}</h3>
+        <p class="story__text">${t(P.story)}</p>
+        <figure class="testimony tilt-r">
+          <span class="tape tape--top" aria-hidden="true"></span>
+          <figcaption class="testimony__source">${t(P.testimony.source)}</figcaption>
+          <blockquote class="testimony__quote hand">${t(P.testimony.quote)}</blockquote>
+          <span class="testimony__heart" aria-hidden="true">${icon.heart}</span>
+        </figure>
       </section>
       ${secret}`;
   }
@@ -90,6 +138,7 @@ window.CupidSections = (function () {
           <div class="rel-card__body">
             <p class="rel-card__type"><span class="label">${esc(ui("rel.type"))}</span> ${t(r.type)}</p>
             <h3 class="rel-card__name">${t(r.name)}</h3>
+            ${r.appearance ? `<p class="rel-card__looks"><span class="label">${esc(ui("rel.looks"))}</span> ${t(r.appearance)}</p>` : ""}
             <p class="rel-card__desc">${t(r.description, { block: true })}</p>
           </div>
           ${r.sticker ? `<span class="sticker sticker--card" aria-hidden="true">${icon.heart}</span>` : ""}

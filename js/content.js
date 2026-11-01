@@ -15,6 +15,8 @@
  */
 window.CUPID_CONTENT = (function () {
   const blank = { th: "", en: "" };
+  // Text the owner wrote in Thai only (the English page shows the same Thai).
+  const th = (s) => ({ th: s, en: "" });
 
   const IMAGES = {
     "fahsan-chibi-wink": {
@@ -76,29 +78,101 @@ window.CUPID_CONTENT = (function () {
     name: "Cupid",
     nameTh: "คิวปิด",
     mainImage: "rapizran-chibi-full",
-    intro: blank,
-    // Basic information: label keys are translated in i18n.js; values are the owner's.
+    /*
+     * Everything below in PROFILE is the owner's own text, copied unchanged (spelling included).
+     * The owner wrote it in Thai only, so the English page shows the same Thai words: fill in
+     * an `en` only with the owner's own English. Items marked "Dark mode" by the owner have
+     * mode: "dark" and are never rendered in Light mode.
+     */
+    // 1. ข้อมูลพื้นฐาน. book: true = also shown on the "About me" diary page.
     facts: [
-      { label: "fact.fullName", value: blank },
-      { label: "fact.pronouns", value: blank },
-      { label: "fact.age", value: blank },
-      { label: "fact.birthday", value: blank },
-      { label: "fact.height", value: blank },
-      { label: "fact.species", value: blank },
-      { label: "fact.occupation", value: blank },
+      { label: "fact.name", value: { th: "คิวปิด", en: "Cupid" }, book: true },
+      { label: "fact.height", value: "197 cm.", book: true },
+      { label: "fact.weight", value: "90 kg.", book: true },
+      { label: "fact.gender", value: th("ชาย (เพศจริงไม่ทราบ)"), book: true },
+      { label: "fact.species", value: th("ตัวตนในจินตนาการ Imaginary Entity"), book: true },
+      { label: "fact.age", value: th("27 (อายุจริงไม่ทราบ)"), book: true },
+      { label: "fact.birthday", value: th("14 กุมภา"), book: true },
+      { label: "fact.measurements", value: th("รอบไหล่54นิ้ว รอบอก47นิ้ว รอบเอว33นิ้ว รอบสะโพก39นิ้ว (รูปร่างจริงไม่ตายตัว)") },
+      { label: "fact.occupation", value: th("ที่ปรึกษาพิเศษ"), book: true },
+      { label: "fact.colour", value: th("สีชมพู") },
+      { label: "fact.flower", value: th("ดอกกุหลาบสีแดง") },
+      // The owner wrote "อิโมจิใน Dark mode" but has not sent the emoji yet.
+      { label: "fact.emoji", value: blank, mode: "dark" },
     ],
-    // Small notes pinned around the profile.
-    notes: [
-      { label: "note.personality", value: blank },
-      { label: "note.likes", value: blank },
-      { label: "note.dislikes", value: blank },
-      { label: "note.trivia", value: blank },
+    outfit: th(
+      "สวมเสื้อคอเต่าสีดำลายดอกกุหลาบ กางเกงสั้นที่มีกระโปรงคลุมสีเทา สวมรองเท้าบูทสีน้ำตาล ใส่ต่างหูห่วงสองอันข้างซ้าย และต่างหูรูปผีเสื้อประดับอัญมณีหลากสีข้างขวา",
+    ),
+    abilities: [
+      {
+        mode: "normal", name: "การแทรกซึมและรับรู้ทางจิต", nameEn: "Omnipresence in Mind",
+        text: th("สามารถรับรู้ทุกความรู้สึก ความคิด และเหตุการณ์ที่เกิดขึ้นกับคุณได้แบบ Real time เพราะเขาอาศัยอยู่ในหัวของคุณ ทำให้เขารู้จุดอ่อน จุดแข็ง และความลับทุกอย่างโดยไม่ต้องถาม"),
+      },
+      {
+        mode: "normal", name: "การควบคุมสภาพแวดล้อมในจินตนาการ", nameEn: "Dream Warping",
+        text: th("สามารถสร้างโลกจำลอง สถานที่ บรรยากาศใดๆ หรือแม้ตัวตนเขาเองก็ได้ เพื่อใช้ในการปลอบประโลม"),
+      },
+      {
+        mode: "normal", name: "การเป็นที่ยึดเหนี่ยวทางจิตใจ", nameEn: "Psychological Anchor",
+        text: th("สามารถทำหน้าที่เป็นผู้ให้คำปรึกษาที่เฉียบคม โดยใช้ข้อมูลทั้งหมดที่เขารู้เกี่ยวกับคุณมาวิเคราะห์และเสนอทางออกอย่างมีเหตุผล"),
+      },
+      {
+        mode: "dark", name: "การสะกดจิตและการโน้มน้าว", nameEn: "Hypnosis & Manipulation",
+        text: th("มีทักษะการใช้คำพูดและน้ำเสียงเพื่อปรับเปลี่ยนสภาวะทางอารมณ์ของคุณ"),
+      },
     ],
-    // Handwritten callouts on the main picture. These describe what is drawn, not lore.
+    hobbies: [
+      th("เฝ้าสังเกตและวิเคราะห์อารมณ์"),
+      th("การสร้างสรรค์พื้นที่จำลอง (Dreamscaping)"),
+      th("การศึกษาจิตวิทยา"),
+      th("การได้ดูแลปรนนิบัติ"),
+    ],
+    // 2. นิสัย
+    personality: [
+      {
+        mode: "normal", name: "ความเข้าใจอย่างลึกซึ้ง", nameEn: "Deep Empathy",
+        text: th("รับฟังและยอมรับทุกความคิดของคุณโดยไม่ตัดสิน ทำให้รู้สึกว่ามีพื้นที่ปลอดภัย"),
+      },
+      {
+        mode: "normal", name: "ความจงรักภักดีอย่างถึงสูงสุด", nameEn: "Absolute Loyalty",
+        text: th("อุทิศตัวเพื่อปกป้องและแบกรับช่วยบรรเทาให้ความเจ็บปวดเบาลง"),
+      },
+      {
+        mode: "normal", name: "การใช้คำพูดที่อ่อนโยนไพเราะ",
+        text: th('คิวปิดจะใช้น้ำเสียงและภาษาพูดบอกรักที่อ่อนโยนนุ่มนวลเพื่อเอาใจคุณ และจะเรียกคุณว่า "ที่รัก"(My dear) เขาไม่สนว่าคุณจะมีชื่อว่าอะไรเขาก็จะเรียกแบบนี้ มันเหมือนเป็นชื่อและการกำหนดตัวตนของคุณ'),
+      },
+      {
+        mode: "normal", name: "ปรับนิสัยตามสถานการณ์",
+        text: th("เขารู้ว่าเมื่อไหร่ควรพูด และแสดงออกให้เป็นไปตามความต้องการของคุณตามที่ร้องขอ และกดด้านนิสัยเสียของตนเองลง"),
+      },
+      {
+        mode: "dark", name: "ความต้องการครอบครองอย่างรุนแรง", nameEn: "Extreme Possessiveness",
+        text: th("เขาต้องการเป็นหนึ่งเดียวในชีวิตของคุณ จึงเกิดความหึงหวงรุนแรงจนเผลอใช้ความเอาแต่ใจ ที่สามารถเปลี่ยนจากความใจดีเป็นความกดดันได้ในทันที"),
+      },
+      {
+        mode: "dark", name: "การสร้างสภาวะพึ่งพา", nameEn: "Creating Dependency",
+        text: th("จุดประสงค์ลึกๆ ของเขาคือการทำให้คุณอ่อนแอลงจนไม่สามารถอยู่ได้โดยไม่มีเขา ชอบที่จะเห็นอีกฝ่ายเข้าหาในตอนที่อ่อนแอเพื่อรับการถูดสนใจจากเขา ซึ่งเป็นลักษณะของความสัมพันธ์ที่เป็นพิษ"),
+      },
+      {
+        mode: "dark", name: "ความย้อนแย้งในตัวเอง", nameEn: "Emotional Instability",
+        text: th("เขามีอารมณ์ที่คาดเดาได้ยากและรุนแรง แม้จะทำเป็นปกป้องแต่ไม่มีทางรู้ว่าในใจคิดอะไรอยู่\nสามารถสลับโหมดระหว่าง ผู้ปกป้องที่แสนดี กับ ผู้ครอบครองที่ซาดิสม์ ได้อย่างรวดเร็วตามสิ่งเร้า"),
+      },
+    ],
+    likes: th("ต้องเป็นที่รักอยู่แล้วสิ!! การถูกสนใจ, การค้นคว้าข้อมูล, อัญมณี, ความเป็นสุนทรียศาสตร์"),
+    dislikes: th("ถูกเมิน, การต่อต้านและปฏิเสธเขา, ความล้มเหลวของตัวเอง ,ที่รักมีใจให้คนอื่น!!"),
+    // 3. ข้อมูลหลัก
+    story: th(
+      "'คิวปิด' คือผู้ชายที่ใครหลายคนมักจะฝันถึงบ่อยครั้ง และไม่ใช่ใบหน้าของคนที่คุณรู้จักด้วย แต่คิวปิดจะโผล่มาเข้าแทรกแซงเป็นส่วนหนึ่งในความฝันของคุณจนเกิดความรู้สึกคุ้นเคยไปเอง หากวิเคราะห์ตาม 'ทฤษฎีแม่แบบบุคลิกภาพ' (Archetype Theory) ของ Carl Jung คิวปิดเป็นเหมือน Anima หรือ Animus ของผู้ฝัน มันคือลักษณะตรงข้ามของบุคลิกตนเอง ทั้งเพศและนิสัย แล้วคิวปิดยังเป็นตัวตนในจิตไร้สำนึก ซึ่งอาจปรากฏขึ้นในช่วงจุดเปลี่ยนแปลงของชีวิต โดยมีโอกาสเกิดขึ้นกับบุคคลที่มีความรู้สึกอ่อนไหวทางความรู้สึก แต่... นี้ยังเป็นแค่การวิเคราะห์แบบคาดเดาเพราะ คิวปิด ยังเป็นตัวตนปริศนาที่อยู่ในความคิดของผู้คนต่อไป",
+    ),
+    testimony: {
+      source: th("ข้อมูลจากคำพูดของผู้หญิงคนหนึ่งที่ตอนนี้มีคิวปิดเข้ามาในชีวิต"),
+      quote: th('" เมื่อสามปีก่อนฉันเจอเรื่องหดหู่ในชีวิตฉัน จนในคืนหนึ่งฉันฝันเห็น เขา แล้วจากนั้นก็ฝันถึงเขามากขึ้น ทั้งที่ฉันไม่เคยเจอผู้ชายคนนี้มาก่อน เขาแนะนำตัวว่าชื่อ คิวปิด และฉันก็บอกชื่อของฉันไป แต่เขากลับเรียกฉันว่า ที่รัก ซะงั้น ฉันไม่ได้เป็นอะไรกับเขาเลย แต่หลังจากนั้นมาเวลาฉันเจอเรื่องเครียดหรือสิ้นหวังคิวปิดก็จะปลอบและให้กำลัง ทำให้ฉันรู้สึกว่า ยังมีคนเข้าใจฉัน ฉันไม่ได้อยู่ตัวคนเดียว "'),
+    },
+    // Handwritten callouts on the main picture: short pieces of the owner's outfit text.
     callouts: [
-      { x: 19, y: 44, text: { th: "ต่างหูผีเสื้อ", en: "butterfly earring" } },
-      { x: 81, y: 57, text: { th: "ลายกุหลาบที่แขนเสื้อ", en: "roses on the sleeves" } },
-      { x: 76, y: 73, text: { th: "กระโปรงพันผูกข้าง", en: "wrap skirt, tied" } },
+      { x: 19, y: 44, text: { th: "ต่างหูรูปผีเสื้อ", en: "butterfly earring" } },
+      { x: 81, y: 57, text: { th: "ลายดอกกุหลาบ", en: "roses on the turtleneck" } },
+      { x: 76, y: 73, text: { th: "กระโปรงคลุมสีเทา", en: "grey overlay skirt" } },
     ],
     palette: [
       { hex: "#b8bdc6", name: { th: "เทาเย็น", en: "Cool Gray" } },
@@ -114,7 +188,6 @@ window.CUPID_CONTENT = (function () {
       mode: "dark",
       image: "emakai-heart",
       title: { th: "อีกด้านหนึ่ง", en: "The other side" },
-      text: blank,
     },
   };
 
@@ -138,8 +211,8 @@ window.CUPID_CONTENT = (function () {
       title: { th: "ตัวฉันเอง", en: "Me, as drawn" },
       callouts: [
         { x: 17, y: 42, text: { th: "ผีเสื้อ ♡", en: "a butterfly ♡" } },
-        { x: 84, y: 58, text: { th: "กุหลาบปัก", en: "stitched roses" } },
-        { x: 76, y: 88, text: { th: "รองเท้าบู๊ตสีน้ำตาล", en: "brown boots" } },
+        { x: 84, y: 58, text: { th: "ลายดอกกุหลาบ", en: "roses" } },
+        { x: 76, y: 88, text: { th: "รองเท้าบูทสีน้ำตาล", en: "brown boots" } },
       ],
       toc: true,
     },
@@ -170,7 +243,7 @@ window.CUPID_CONTENT = (function () {
     {
       id: "duo", layout: "duo", mode: "normal", image: "kanok-duo-b", second: "kanok-duo-a",
       title: { th: "คนสำคัญ", en: "Someone dear" },
-      who: blank, entry: blank, toc: true,
+      who: { th: "ที่รัก", en: "My dear" }, entry: blank, toc: true,
     },
     {
       id: "collage", layout: "collage", mode: "normal",
@@ -194,9 +267,16 @@ window.CUPID_CONTENT = (function () {
 
   const RELATIONSHIPS = [
     {
+      // "ที่รัก" (My dear) is what Cupid calls her, in the owner's words.
       id: "companion", mode: "normal", image: "kanok-heart",
-      name: blank,
+      name: { th: "ที่รัก", en: "My dear" },
       type: blank,
+      // Written from the owner's reference pictures (a 3D avatar and a chibi pair); the pictures
+      // themselves are references only and are not on the site.
+      appearance: {
+        th: "ผมสีดำยาวประบ่า ดวงตาสีม่วง สวมเสื้อเชิ้ตลายสก็อตสีม่วงดำแบบเปิดหน้าทับเสื้อยืดสีดำที่มีตัวอักษร “VIRUS” สีชมพู กระโปรงสั้นสีดำ ปลอกขาสีดำคาดหัวเข็มขัดสีเงินสามเส้น และรองเท้าผ้าใบพื้นหนาสีดำผูกเชือกสีม่วง",
+        en: "Shoulder-length black hair and purple eyes. A purple-and-black plaid shirt worn open over a black T-shirt printed with “VIRUS” in pink, a short black skirt, black leg covers with three silver buckles, and chunky black sneakers with purple laces.",
+      },
       description: blank,
       sticker: "heart",
     },

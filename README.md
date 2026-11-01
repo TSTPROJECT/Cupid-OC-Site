@@ -104,10 +104,24 @@ To add or replace art: put the original in `assets-src/drive/`, add it to `SLUGS
 `tools/build_images.py`, run `python tools/build_images.py` (needs Pillow), then add the image to `IMAGES` in
 `js/content.js` with the printed width/height.
 
+## Character text
+
+The profile (basic information, outfit, abilities, hobbies, personality, likes, dislikes, main information and
+the woman's quote) is the owner's own Thai text, copied without changes — including spelling. The owner wrote
+it in Thai only, so the English page shows the same Thai words with a short note; add an `en` only with the
+owner's own English. Items the owner marked "Dark mode" (one ability, three personality traits, the emoji) have
+`mode: "dark"`.
+
+The relationship card for ที่รัก ("My dear", the owner's words) has an appearance description written from the
+owner's two reference pictures (a 3D avatar and a chibi pair). The reference pictures are not on the site.
+
+The entrance shows an 18+ content warning; opening the diary counts as confirming the visitor is 18 or older.
+
 ## Still needed from the owner
 
 - Which photos are Dark-mode only (the red-circled reference)
-- Introduction, basic information, personality / likes / dislikes / trivia (Thai and English)
-- Diary entry texts and dates, the dark-side text
-- Name, relationship type and description of the companion in the PpAws Kanok pieces
+- The Dark-mode emoji (the profile shows a blank for it in Dark mode)
+- English versions of the character text, if wanted
+- Diary entry texts and dates
+- Relationship type and description for ที่รัก
 - Character owner name and special thanks for the credits

@@ -667,7 +667,8 @@ svg.ico-line {
   z-index: 50;
   display: grid;
   place-items: center;
-  padding: 72px 16px 24px;
+  align-content: center;
+  padding: 72px 16px 20px;
   background:
     radial-gradient(ellipse at 50% 40%, transparent 0 40%, rgba(73, 54, 62, 0.16) 100%),
     var(--bg);
@@ -726,7 +727,66 @@ svg.ico-line {
 }
 .entrance__scene {
   perspective: 2200px;
-  width: min(400px, 100%, (100svh - 120px) * 0.7);
+  width: min(400px, 100%, (100svh - 250px) * 0.7);
+  min-width: min(240px, 100%);
+}
+/* 18+ content warning under the closed diary */
+.entrance__warning {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  width: min(460px, 100%);
+  margin-top: clamp(12px, 2.4svh, 22px);
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 0, 87, 0.45);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--paper) 88%, var(--s-vivid));
+  color: var(--ink-2);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  opacity: 0;
+  transition: opacity 1s var(--ease) 0.4s;
+}
+.entrance.is-ready .entrance__warning {
+  opacity: 1;
+}
+.entrance.is-opening .entrance__warning {
+  opacity: 0;
+  transition-delay: 0s;
+}
+.entrance__warning-badge {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--s-vivid);
+  color: #fff;
+  font-family: var(--f-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+.entrance__warning-title {
+  font-weight: 600;
+  color: var(--accent-text);
+  letter-spacing: 0.04em;
+}
+.entrance__warning-confirm {
+  margin-top: 2px;
+  font-style: italic;
+  color: var(--ink-3);
+}
+/* very short screens (phone held sideways): let the entrance scroll so the warning is never cut off */
+@media (max-height: 600px) {
+  .entrance {
+    align-content: start;
+    overflow-y: auto;
+  }
+  .entrance__petals {
+    display: none;
+  }
 }
 .entrance__book {
   position: relative;
