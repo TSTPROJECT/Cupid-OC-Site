@@ -133,12 +133,49 @@ window.CupidSections = (function () {
       ${secret}`;
   }
 
+  const SCALE_STEPS = 10;
+  const markCupid = `<span class="mark mark--cupid" aria-hidden="true">${icon.butterflyFill}</span>`;
+  const markDear = `<span class="mark mark--dear" aria-hidden="true"></span>`;
+
+  /** The owner's relationship chart: one row per pair of words, Cupid and the other person placed on each. */
+  function scales(r) {
+    if (!r.scales || !r.scales.length) return "";
+    const cupid = txt({ th: C.PROFILE.nameTh, en: C.PROFILE.name });
+    const dear = txt(r.name);
+    const rows = r.scales
+      .map((s) => {
+        const steps = Array.from({ length: SCALE_STEPS }, (_, i) => {
+          const marks = (i === s.cupid ? markCupid : "") + (i === s.dear ? markDear : "");
+          return `<span class="scale__step${marks ? " scale__step--marked" : ""}">${marks || '<i class="scale__dot"></i>'}</span>`;
+        }).join("");
+        const label = ui("rel.scaleLabel", {
+          left: s.left, right: s.right, a: cupid, b: dear, an: s.cupid + 1, bn: s.dear + 1, n: SCALE_STEPS,
+        });
+        return `
+          <li class="scale">
+            <span class="scale__word scale__word--left" lang="en">${esc(s.left)}</span>
+            <span class="scale__track" role="img" aria-label="${esc(label)}">${steps}</span>
+            <span class="scale__word scale__word--right" lang="en">${esc(s.right)}</span>
+          </li>`;
+      })
+      .join("");
+    return `
+      <section class="scales reveal" aria-label="${esc(ui("rel.scales"))}">
+        <ul class="scales__legend">
+          <li>${markCupid}${esc(cupid)}</li>
+          <li>${markDear}${esc(dear)}</li>
+        </ul>
+        <ol class="scales__list">${rows}</ol>
+      </section>`;
+  }
+
   function relationships() {
     // Only what the owner has written is shown; empty fields are left out rather than marked as blanks.
     const cards = C.RELATIONSHIPS.filter(isVisible)
       .map(
         (r, i) => `
-        <li class="rel-card ${i % 2 ? "tilt-r" : "tilt-l"}${r.mode === "dark" ? " rel-card--dark" : ""}">
+        <li class="rel${r.scales && r.scales.length ? " rel--scales" : ""}">
+        <article class="rel-card ${i % 2 ? "tilt-r" : "tilt-l"}${r.mode === "dark" ? " rel-card--dark" : ""}">
           <span class="tape tape--top" aria-hidden="true"></span>
           <figure class="rel-card__photo">${img(r.image, { sizes: "(max-width: 860px) 80vw, 340px" })}</figure>
           <div class="rel-card__body">
@@ -148,6 +185,8 @@ window.CupidSections = (function () {
             ${txt(r.description) ? `<p class="rel-card__desc">${t(r.description)}</p>` : ""}
           </div>
           ${r.sticker ? `<span class="sticker sticker--card" aria-hidden="true">${icon.heart}</span>` : ""}
+        </article>
+        ${scales(r)}
         </li>`,
       )
       .join("");
@@ -175,12 +214,18 @@ window.CupidSections = (function () {
       })
       .join("");
 
+    const od = C.CREDITS.originalDesign;
+    const designLink = od.url
+      ? `<a class="credits__link" href="${esc(od.url)}" target="_blank" rel="noopener noreferrer">${esc(od.name)}</a>`
+      : esc(od.name);
+
     return `
       <div class="credits">
         <dl class="credits__list">
           <div><dt>${esc(ui("credits.owner"))}</dt><dd>${t(C.CREDITS.owner)}</dd></div>
+          <div><dt>${esc(ui("credits.original"))}</dt><dd>${designLink}</dd></div>
           <div><dt>${esc(ui("credits.designer"))}</dt><dd>${t(C.CREDITS.designer)}</dd></div>
-          <div><dt>${esc(ui("credits.thanks"))}</dt><dd>${t(C.CREDITS.thanks)}</dd></div>
+          <div class="credits__note"><dt>${esc(ui("credits.thanks"))}</dt><dd>${t(C.CREDITS.thanks, { block: true })}</dd></div>
         </dl>
         <h3 class="card-title card-title--center">${esc(ui("credits.artists"))}</h3>
         <ul class="artists">${artists}</ul>

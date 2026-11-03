@@ -44,10 +44,12 @@ Everything the site says about Cupid is in `js/content.js`.
 
 - Text fields are `{ th: "...", en: "..." }`. Leave a field as `""` and the site shows a clearly marked
   "waiting for the owner" blank. If only one language is filled in, that language is shown for both.
-- `mode: "normal"` shows in both themes; `mode: "dark"` is only rendered in Dark mode.
+- `mode: "normal"` shows in both themes; `mode: "dark"` is only rendered in Dark mode; `mode: "light"` is only
+  rendered in Light mode (use it with a matching dark item to swap one for the other).
 - Diary pages are listed in reading order in `DIARY`. Keep the number of normal pages **even** and the
   number of dark pages **even**, so the back cover always lands on a left-hand page.
-- Add relationships by copying the block in `RELATIONSHIPS`.
+- Add relationships by copying the block in `RELATIONSHIPS`. Its `scales` list draws the relationship chart beside
+  the card: each row is a word at each end and a position from 0 (left) to 9 (right) for Cupid and for the other person.
 
 ### Dark-mode-only content
 

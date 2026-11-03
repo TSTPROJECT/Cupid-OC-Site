@@ -7,6 +7,7 @@
  *    marked "waiting for the owner" blank instead of made-up lore.
  *  - mode: "normal" = shown in Light and Dark mode
  *          "dark"   = only rendered in Dark mode (never placed in the page in Light mode)
+ *          "light"  = only rendered in Light mode (for things the dark version replaces)
  *  - Images are referenced by key from IMAGES below.
  *
  * PROVISIONAL: the red-circled reference that marks the Dark-mode photos was not in the
@@ -77,9 +78,10 @@ window.CUPID_CONTENT = (function () {
     nameTh: "คิวปิด",
     mainImage: "rapizran-chibi-full",
     /*
-     * Everything below in PROFILE is the owner's own Thai text. The only changes are three
-     * spelling fixes (ถูด→ถูก, นี้→นี่, " ,ที่รัก"→", ที่รัก"). The English is a translation
-     * written for this site at the owner's request. Items the owner marked "Dark mode"
+     * Everything below in PROFILE is the owner's own Thai text. The only changes are four
+     * spelling fixes (ถูด→ถูก, นี้→นี่, " ,ที่รัก"→", ที่รัก", อกด้านขาว→อกด้านขวา) and a space
+     * after !DANGER! in the outfit. The English is a translation written for this site at
+     * the owner's request. Items the owner marked "Dark mode"
      * have mode: "dark" and are never rendered in Light mode.
      */
     // 1. ข้อมูลพื้นฐาน. book: true = also shown on the "About me" diary page.
@@ -101,12 +103,13 @@ window.CUPID_CONTENT = (function () {
       { label: "fact.occupation", value: { th: "ที่ปรึกษาพิเศษ", en: "Special Advisor" }, book: true },
       { label: "fact.colour", value: { th: "สีชมพู", en: "Pink" } },
       { label: "fact.flower", value: { th: "ดอกกุหลาบสีแดง", en: "Red rose" } },
-      // Shown in both modes. The owner has not sent the emoji itself yet.
-      { label: "fact.emoji", value: blank },
+      // One emoji row per theme: the light set in Light mode, the dark set in Dark mode.
+      { label: "fact.emoji", value: "💘 💌 🌹 🦋", mode: "light" },
+      { label: "fact.emoji", value: "🫀 😈 💀 🥀", mode: "dark" },
     ],
     outfit: {
-      th: "สวมเสื้อคอเต่าสีดำลายดอกกุหลาบและข้อความว่า DIE ALONE อยู่ที่อกด้านซ้าย กางเกงสั้นที่มีกระโปรงคลุมสีเทา สวมรองเท้าบูทสีน้ำตาล ใส่ต่างหูห่วงสองอันข้างซ้าย และต่างหูรูปผีเสื้อประดับอัญมณีหลากสีข้างขวา",
-      en: "A black rose-patterned turtleneck with the words DIE ALONE on the left side of the chest, shorts with a grey overlay skirt and brown boots. Two hoop earrings on the left, and a butterfly earring set with multicoloured gems on the right.",
+      th: "สวมเสื้อคอเต่าสีดำลายดอกกุหลาบและข้อความว่า DIE ALONE อยู่ที่อกด้านซ้าย มีตะเข็บเย็บที่อกด้านขวา กางเกงสั้นที่มีกระโปรงคลุมสีเทาปลายกระโปรงสีดำ มีโบว์ผูกที่เอวปลายโบว์มีคำว่า !DANGER! สวมรองเท้าบูทสีน้ำตาล ใส่ต่างหูห่วงสองอันข้างซ้าย และต่างหูรูปผีเสื้อประดับอัญมณีหลากสีข้างขวา",
+      en: "A black rose-patterned turtleneck with the words DIE ALONE on the left side of the chest and a line of stitches on the right side. Shorts with a grey overlay skirt with a black hem, and a bow tied at the waist with the word !DANGER! on its tails. Brown boots. Two hoop earrings on the left, and a butterfly earring set with multicoloured gems on the right.",
     },
     /*
      * name.th is the owner's Thai name. name.en is the owner's own English name when
@@ -171,7 +174,8 @@ window.CUPID_CONTENT = (function () {
         },
       },
       {
-        mode: "normal",
+        // ownerEn: the owner asked for these two English names to be shown too.
+        mode: "normal", ownerEn: true,
         name: { th: "การใช้คำพูดที่อ่อนโยนไพเราะ", en: "Gentle, Sweet Words" },
         text: {
           th: 'คิวปิดจะใช้น้ำเสียงและภาษาพูดบอกรักที่อ่อนโยนนุ่มนวลเพื่อเอาใจคุณ และจะเรียกคุณว่า "ที่รัก"(My dear) เขาไม่สนว่าคุณจะมีชื่อว่าอะไรเขาก็จะเรียกแบบนี้ มันเหมือนเป็นชื่อและการกำหนดตัวตนของคุณ',
@@ -179,7 +183,7 @@ window.CUPID_CONTENT = (function () {
         },
       },
       {
-        mode: "normal",
+        mode: "normal", ownerEn: true,
         name: { th: "ปรับนิสัยตามสถานการณ์", en: "Adapting to the Situation" },
         text: {
           th: "เขารู้ว่าเมื่อไหร่ควรพูด และแสดงออกให้เป็นไปตามความต้องการของคุณตามที่ร้องขอ และกดด้านนิสัยเสียของตนเองลง",
@@ -213,7 +217,7 @@ window.CUPID_CONTENT = (function () {
     ],
     likes: {
       th: "ต้องเป็นที่รักอยู่แล้วสิ!! การถูกสนใจ, การค้นคว้าข้อมูล, อัญมณี, ความเป็นสุนทรียศาสตร์",
-      en: "Being loved, of course!! Attention, research, gemstones, aesthetics",
+      en: "My dear, of course!! Attention, research, gemstones, aesthetics",
     },
     dislikes: {
       th: "ถูกเมิน, การต่อต้านและปฏิเสธเขา, ความล้มเหลวของตัวเอง, ที่รักมีใจให้คนอื่น!!",
@@ -318,11 +322,11 @@ window.CUPID_CONTENT = (function () {
     },
     // ---- dark pages ----
     {
-      id: "other-me", layout: "pair", mode: "dark", image: "rapizran-pale-full",
+      id: "other-me", layout: "pair", mode: "dark", image: "rapizran-butterflies",
       title: { th: "เงาในกระจก", en: "In the mirror" }, entry: blank, toc: true,
     },
     {
-      id: "butterflies", layout: "bleed", mode: "dark", image: "rapizran-butterflies",
+      id: "butterflies", layout: "bleed", mode: "dark", image: "rapizran-pale-full",
       note: { th: "ผีเสื้อพวกนี้ไม่เคยบินหนีไปไหน", en: "the butterflies never fly away" },
     },
     // ---- ending ----
@@ -345,16 +349,40 @@ window.CUPID_CONTENT = (function () {
       },
       description: blank,
       sticker: "heart",
+      /*
+       * Relationship scales from the owner's chart, shown beside the card. Each row has a
+       * word at each end; cupid (pink butterfly) and dear (purple diamond) are positions
+       * from 0 (all the way left) to 9 (all the way right). Words are the owner's English,
+       * shown in both languages; "Intereste" → "Interested" and "Dominate" → "Dominant".
+       */
+      scales: [
+        { left: "Extrovert", right: "Introvert", cupid: 3, dear: 7 },
+        { left: "Jealous", right: "Chill", cupid: 0, dear: 9 },
+        { left: "Overprotective", right: "Detached", cupid: 0, dear: 8 },
+        { left: "Devoted", right: "Casual", cupid: 2, dear: 5 },
+        { left: "Interested", right: "Easygoing", cupid: 0, dear: 5 },
+        { left: "Attention", right: "Space", cupid: 0, dear: 7 },
+        { left: "Dominant", right: "Submissive", cupid: 0, dear: 9 },
+        { left: "Possessive", right: "Lax", cupid: 0, dear: 9 },
+        { left: "Devotus", right: "Innocent", cupid: 1, dear: 8 },
+        { left: "In love", right: "Unsure", cupid: 0, dear: 9 },
+      ],
     },
     // Add more people by copying the block above. Use mode: "dark" for a secret one.
   ];
 
   const CREDITS = {
-    owner: blank,
+    owner: "Shouko71",
+    // Who designed Cupid. url is the designer's page (Facebook tracking removed from the link).
+    originalDesign: { name: "RapiZRAN", url: "https://www.deviantart.com/rapizza" },
     // Artists come from the file names in the client's folder ("Cr. <name>").
     artists: ["RapiZRAN", "PpAws Kanok", "Fahsan", "Father", "Maya Alphax", "emakai"],
     designer: { th: "TST Project", en: "TST Project" },
-    thanks: blank,
+    // The owner's own Thai words; the English is a translation written for this site.
+    thanks: {
+      th: "ขอบคุณคุณวิลจากใจจริงที่ออกแบบตัวละครที่ทำให้เราติดมาจนถึงทุกวันนี้ และดีใจที่ยังเก็บความทรงจำที่ดีร่วมกันมานะคะ เราจะคงจดจำและคิดถึงเสมอ และขอบคุณผู้จัดทำเว็บไซต์ที่สานฝันให้เรามีเว็บไซต์ที่ออกแบบมาตรงตามตัวละครและมีลูกเล่นที่น่าสนใจค่ะ!",
+      en: "Thank you from the bottom of my heart, Will, for designing the character I have been hooked on to this very day. I'm so glad we still keep the good memories we made together. I will always remember them and miss you. And thank you to the website's creator for making my dream come true with a site designed just like the character, full of fun little touches!",
+    },
     assets: [
       { th: "ฟอนต์: Cormorant Garamond, EB Garamond, Caveat, Pinyon Script, Noto Serif Thai, Mali (Google Fonts, SIL OFL)", en: "Fonts: Cormorant Garamond, EB Garamond, Caveat, Pinyon Script, Noto Serif Thai, Mali (Google Fonts, SIL OFL)" },
       { th: "ลวดลายกระดาษ เทป หัวใจ และสติกเกอร์ วาดด้วยโค้ดสำหรับเว็บนี้", en: "Paper, tape, hearts and stickers drawn in code for this site" },

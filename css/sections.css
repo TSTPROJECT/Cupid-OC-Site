@@ -487,10 +487,179 @@
   transform: scaleY(-1);
 }
 .rel-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 380px));
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: clamp(32px, 5vw, 56px);
+}
+.rel {
+  flex: 0 1 380px;
+  min-width: min(100%, 300px);
+}
+/* A card with the owner's relationship chart beside it takes a whole row. */
+.rel--scales {
+  flex-basis: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 380px) minmax(0, 600px);
+  justify-content: center;
+  align-items: center;
+  gap: clamp(32px, 5vw, 64px);
+}
+@media (max-width: 899px) {
+  .rel--scales {
+    grid-template-columns: minmax(0, 380px);
+  }
+  .rel--scales .scales {
+    width: min(100%, 600px);
+    justify-self: center;
+  }
+}
+
+/* ---------- relationship scales ---------- */
+.scales {
+  --scale-dear: var(--c-purple);
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 6px;
+  padding: clamp(16px, 3vw, 28px) clamp(12px, 3vw, 28px);
+  box-shadow: var(--shadow-1);
+}
+:root[data-theme="dark"] .scales {
+  --scale-dear: #b77cf0;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+.scales__legend {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  font-family: var(--f-display);
+  font-size: 1.15rem;
+  font-style: italic;
+  color: var(--ink-2);
+}
+.scales__legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.scales__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.scale {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.7fr) minmax(0, 1.2fr);
+  align-items: center;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+}
+.scale:last-child {
+  border-bottom: 0;
+}
+.scale__word {
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+  overflow-wrap: break-word;
+  line-height: 1.2;
+}
+.scale__word--left {
+  text-align: right;
+}
+.scale__track {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  align-items: center;
+  height: 30px;
+}
+.scale__track::before {
+  content: "";
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  top: 50%;
+  height: 4px;
+  margin-top: -2px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--c-pink) 45%, transparent);
+}
+.scale__step {
+  position: relative;
+  display: grid;
+  place-items: center;
+  height: 100%;
+}
+.scale__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--ink-3);
+  opacity: 0.6;
+}
+.mark {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  flex: none;
+}
+.mark--cupid {
+  color: var(--c-pink);
+  filter: drop-shadow(0 1px 1px rgba(44, 41, 48, 0.25));
+}
+.mark--cupid svg {
+  width: 100%;
+  height: auto;
+}
+.mark--dear::before {
+  content: "";
+  width: 15px;
+  height: 15px;
+  background: var(--scale-dear);
+  rotate: 45deg;
+  box-shadow: 0 1px 2px rgba(44, 41, 48, 0.3);
+}
+/* Both on the same step: sit side by side, overlapping a little. */
+.scale__step--marked:has(.mark + .mark) .mark--cupid {
+  translate: -30% 0;
+}
+.scale__step--marked:has(.mark + .mark) .mark--dear {
+  position: absolute;
+  translate: 40% 0;
+}
+@media (max-width: 559px) {
+  .scale {
+    grid-template-columns: 1fr 1fr;
+    row-gap: 4px;
+  }
+  .scale__word--left {
+    text-align: left;
+  }
+  .scale__word--right {
+    text-align: right;
+  }
+  .scale__track {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .mark {
+    width: 22px;
+    height: 22px;
+  }
+  .mark--dear::before {
+    width: 12px;
+    height: 12px;
+  }
 }
 .rel-card {
   position: relative;
@@ -616,6 +785,37 @@
 }
 .credits__list dd {
   grid-row: 1;
+}
+.credits__link {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 0.2em;
+}
+.credits__link:hover {
+  color: var(--accent);
+}
+/* A long message: its label above, the words centred underneath. */
+.credits__list > .credits__note {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  text-align: center;
+  gap: 8px;
+  padding: 18px 0;
+}
+.credits__list > .credits__note::before {
+  display: none;
+}
+.credits__note dt {
+  text-align: center;
+}
+.credits__note dd {
+  grid-column: 1;
+  grid-row: 2;
+  max-width: 40em;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-style: normal;
+  line-height: 1.8;
 }
 @media (max-width: 559px) {
   .credits__list > div {

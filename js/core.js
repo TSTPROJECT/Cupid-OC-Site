@@ -31,7 +31,7 @@ window.Cupid = (function () {
   /** Interface text by key, with {a}-style variables. */
   function ui(key, vars) {
     let s = (UI[state.lang] && UI[state.lang][key]) || UI.en[key] || key;
-    if (vars) for (const k in vars) s = s.replace("{" + k + "}", vars[k]);
+    if (vars) for (const k in vars) s = s.split("{" + k + "}").join(vars[k]);
     return s;
   }
 
@@ -57,7 +57,10 @@ window.Cupid = (function () {
   }
 
   function isVisible(item) {
-    return !!item && (item.mode !== "dark" || state.theme === "dark");
+    if (!item) return false;
+    if (item.mode === "dark") return state.theme === "dark";
+    if (item.mode === "light") return state.theme !== "dark";
+    return true;
   }
 
   function image(key) {
@@ -96,6 +99,7 @@ window.Cupid = (function () {
     arrowR: '<svg viewBox="0 0 24 24" aria-hidden="true" class="ico-line"><path d="M9 5l7 7-7 7"/></svg>',
     close: '<svg viewBox="0 0 24 24" aria-hidden="true" class="ico-line"><path d="M6 6l12 12M18 6L6 18"/></svg>',
     menu: '<svg viewBox="0 0 24 24" aria-hidden="true" class="ico-line"><path d="M4 7h16M4 12h16M4 17h10"/></svg>',
+    butterflyFill: '<svg viewBox="0 0 32 26" aria-hidden="true"><path fill="currentColor" d="M15 12C12 4 6 0 2.5 2S1 12 8 13c-5 1.5-5 8-1 9s7-4 8-8zM17 12c3-8 9-12 12.5-10S31 12 24 13c5 1.5 5 8 1 9s-7-4-8-8z"/><path d="M16 7v15M16 7l-2-4M16 7l2-4" fill="none" stroke="#2c2930" stroke-width="1.4" stroke-linecap="round"/></svg>',
     butterfly: '<svg viewBox="0 0 40 32" aria-hidden="true" class="ico-line"><path d="M20 8v20M20 12c-3-7-11-11-15-8s0 11 7 11c-6 1-8 8-3 10s9-5 11-9M20 12c3-7 11-11 15-8s0 11-7 11c6 1 8 8 3 10s-9-5-11-9M20 8l-3-5M20 8l3-5"/></svg>',
     star: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l2.2 7.3 7.3 2.2-7.3 2.2L12 20.5l-2.2-7.3L2.5 11l7.3-2.2z"/></svg>',
     soundOn: '<svg viewBox="0 0 24 24" aria-hidden="true" class="ico-line"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6M18.2 6.4a8 8 0 0 1 0 11.2"/></svg>',
