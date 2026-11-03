@@ -17,6 +17,11 @@
 window.CUPID_CONTENT = (function () {
   const blank = { th: "", en: "" };
 
+  /*
+   * alt is the picture's name, shown under it in the photo viewer. Thai names are the owner's
+   * own file names (ตอเจอ → ตอนเจอ fixed at the owner's request); English is a translation.
+   * Pictures still named "Cr. <artist>" in the owner's folder keep a short description.
+   */
   const IMAGES = {
     "fahsan-chibi-wink": {
       w: 1419, h: 1800, artist: "Fahsan", mode: "normal", cutout: true,
@@ -24,15 +29,15 @@ window.CUPID_CONTENT = (function () {
     },
     "father-portrait": {
       w: 1170, h: 1800, artist: "Father", mode: "normal",
-      alt: { th: "ภาพเหมือนคิวปิดในเสื้อดำลาย DIE ALONE", en: "Portrait of Cupid in a black DIE ALONE top" },
+      alt: { th: "คิวปิดตอนเดินมาส่งถึงบ้าน", en: "Cupid walking you home" },
     },
     "rapizran-chibi-full": {
       w: 1800, h: 1800, artist: "RapiZRAN", mode: "normal", cutout: true,
-      alt: { th: "คิวปิดแบบจิบิเต็มตัว ด้านหน้า", en: "Full-body chibi Cupid, front view" },
+      alt: { th: "รูปต้นแบบของคิวปิด", en: "Cupid's original design" },
     },
     "rapizran-night": {
       w: 1800, h: 1251, artist: "RapiZRAN", mode: "normal",
-      alt: { th: "คิวปิดเอานิ้วแตะริมฝีปากบนพื้นดำ", en: "Cupid with a finger to the lips, on a black background" },
+      alt: { th: "แค่นี้ ไม่เจ็บหรอกนะ", en: "Just this much won't hurt, you know" },
     },
     "rapizran-cake-card": {
       w: 1162, h: 1068, artist: "RapiZRAN", mode: "normal",
@@ -57,19 +62,19 @@ window.CUPID_CONTENT = (function () {
     // ---- dark mode only (provisional, see note at the top) ----
     "emakai-heart": {
       w: 1770, h: 1800, artist: "emakai", mode: "dark",
-      alt: { th: "คิวปิดถือหัวใจไว้ในมือ ท่ามกลางเส้นสีแดง", en: "Cupid holding a heart among red veins" },
+      alt: { th: "แววตาที่มองที่รัก", en: "The way he looks at My dear" },
     },
     "maya-monochrome": {
       w: 1280, h: 1225, artist: "Maya Alphax", mode: "dark",
-      alt: { th: "คิวปิดขาวดำ ยื่นมือออกไปในแสง", en: "Monochrome Cupid reaching into the light" },
+      alt: { th: "ตอนเจอในฝันครั้งแรก", en: "The first time we met in a dream" },
     },
     "rapizran-pale-full": {
       w: 1251, h: 1800, artist: "RapiZRAN", mode: "dark", cutout: true,
-      alt: { th: "ร่างผิวซีดผมยาวสีฟ้าชมพู มีผีเสื้อล้อมรอบ", en: "Pale long-haired figure with butterflies" },
+      alt: { th: "รูปต้นแบบของคิวปิด ร่าง???", en: "Cupid's original design, form ???" },
     },
     "rapizran-butterflies": {
       w: 1800, h: 1251, artist: "RapiZRAN", mode: "dark",
-      alt: { th: "ภาพขาวดำ ผีเสื้อและผมยาว", en: "Black-and-white drawing with butterflies and long hair" },
+      alt: { th: "ร่างที่ไม่เคยเปิดเผย", en: "The form never revealed" },
     },
   };
 
