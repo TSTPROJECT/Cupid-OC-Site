@@ -289,17 +289,6 @@
   text-decoration-color: var(--s-vivid);
   text-decoration-thickness: 2px;
 }
-.page-date {
-  font-size: 0.85em;
-  color: var(--pg-ink-2);
-  letter-spacing: 0.06em;
-}
-.page-date > span:first-child {
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  font-size: 0.85em;
-  margin-right: 0.4em;
-}
 .entry__text {
   color: var(--pg-ink);
 }

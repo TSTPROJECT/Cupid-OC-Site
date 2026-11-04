@@ -148,14 +148,16 @@ window.CupidSections = (function () {
           const marks = (i === s.cupid ? markCupid : "") + (i === s.dear ? markDear : "");
           return `<span class="scale__step${marks ? " scale__step--marked" : ""}">${marks || '<i class="scale__dot"></i>'}</span>`;
         }).join("");
+        const left = txt(s.left);
+        const right = txt(s.right);
         const label = ui("rel.scaleLabel", {
-          left: s.left, right: s.right, a: cupid, b: dear, an: s.cupid + 1, bn: s.dear + 1, n: SCALE_STEPS,
+          left, right, a: cupid, b: dear, an: s.cupid + 1, bn: s.dear + 1, n: SCALE_STEPS,
         });
         return `
           <li class="scale">
-            <span class="scale__word scale__word--left" lang="en">${esc(s.left)}</span>
+            <span class="scale__word scale__word--left">${t(s.left)}</span>
             <span class="scale__track" role="img" aria-label="${esc(label)}">${steps}</span>
-            <span class="scale__word scale__word--right" lang="en">${esc(s.right)}</span>
+            <span class="scale__word scale__word--right">${t(s.right)}</span>
           </li>`;
       })
       .join("");

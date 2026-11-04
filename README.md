@@ -49,7 +49,7 @@ Everything the site says about Cupid is in `js/content.js`.
 - Diary pages are listed in reading order in `DIARY`. Keep the number of normal pages **even** and the
   number of dark pages **even**, so the back cover always lands on a left-hand page.
 - Add relationships by copying the block in `RELATIONSHIPS`. Its `scales` list draws the relationship chart beside
-  the card: each row is a word at each end and a position from 0 (left) to 9 (right) for Cupid and for the other person.
+  the card: each row is a word at each end (`{ th, en }`) and a position from 0 (left) to 9 (right) for Cupid and for the other person.
 
 ### Dark-mode-only content
 

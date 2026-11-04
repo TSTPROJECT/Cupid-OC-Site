@@ -506,11 +506,12 @@
   gap: clamp(32px, 5vw, 64px);
 }
 @media (max-width: 899px) {
+  /* Stacked: the card keeps its own width, the chart gets the wider column. */
   .rel--scales {
-    grid-template-columns: minmax(0, 380px);
+    grid-template-columns: minmax(0, 600px);
   }
-  .rel--scales .scales {
-    width: min(100%, 600px);
+  .rel--scales .rel-card {
+    width: min(100%, 380px);
     justify-self: center;
   }
 }

@@ -85,8 +85,10 @@ window.CUPID_CONTENT = (function () {
     /*
      * Everything below in PROFILE is the owner's own Thai text. The only changes are four
      * spelling fixes (ถูด→ถูก, นี้→นี่, " ,ที่รัก"→", ที่รัก", อกด้านขาว→อกด้านขวา) and a space
-     * after !DANGER! in the outfit. The English is a translation written for this site at
-     * the owner's request. Items the owner marked "Dark mode"
+     * after !DANGER! in the outfit. At the owner's request the Thai text keeps no English
+     * (Real time → เรียลไทม์; "Imaginary Entity", "(My dear)" and "(Dreamscaping)" are on the
+     * English page only). The English is a translation written for this site at the owner's
+     * request. Items the owner marked "Dark mode"
      * have mode: "dark" and are never rendered in Light mode.
      */
     // 1. ข้อมูลพื้นฐาน. book: true = also shown on the "About me" diary page.
@@ -95,7 +97,7 @@ window.CUPID_CONTENT = (function () {
       { label: "fact.height", value: "197 cm.", book: true },
       { label: "fact.weight", value: "90 kg.", book: true },
       { label: "fact.gender", value: { th: "ชาย (เพศจริงไม่ทราบ)", en: "Male (true sex unknown)" }, book: true },
-      { label: "fact.species", value: { th: "ตัวตนในจินตนาการ Imaginary Entity", en: "Imaginary Entity" }, book: true },
+      { label: "fact.species", value: { th: "ตัวตนในจินตนาการ", en: "Imaginary Entity" }, book: true },
       { label: "fact.age", value: { th: "27 (อายุจริงไม่ทราบ)", en: "27 (true age unknown)" }, book: true },
       { label: "fact.birthday", value: { th: "14 กุมภา", en: "14 February" }, book: true },
       {
@@ -125,7 +127,7 @@ window.CUPID_CONTENT = (function () {
         mode: "normal", ownerEn: true,
         name: { th: "การแทรกซึมและรับรู้ทางจิต", en: "Omnipresence in Mind" },
         text: {
-          th: "สามารถรับรู้ทุกความรู้สึก ความคิด และเหตุการณ์ที่เกิดขึ้นกับคุณได้แบบ Real time เพราะเขาอาศัยอยู่ในหัวของคุณ ทำให้เขารู้จุดอ่อน จุดแข็ง และความลับทุกอย่างโดยไม่ต้องถาม",
+          th: "สามารถรับรู้ทุกความรู้สึก ความคิด และเหตุการณ์ที่เกิดขึ้นกับคุณได้แบบเรียลไทม์ เพราะเขาอาศัยอยู่ในหัวของคุณ ทำให้เขารู้จุดอ่อน จุดแข็ง และความลับทุกอย่างโดยไม่ต้องถาม",
           en: "He can sense every feeling, thought and event that happens to you in real time, because he lives inside your head. So he knows your weaknesses, your strengths and every secret without having to ask.",
         },
       },
@@ -156,7 +158,7 @@ window.CUPID_CONTENT = (function () {
     ],
     hobbies: [
       { th: "เฝ้าสังเกตและวิเคราะห์อารมณ์", en: "Observing and analysing emotions" },
-      { th: "การสร้างสรรค์พื้นที่จำลอง (Dreamscaping)", en: "Creating simulated spaces (Dreamscaping)" },
+      { th: "การสร้างสรรค์พื้นที่จำลอง", en: "Dreamscaping" },
       { th: "การศึกษาจิตวิทยา", en: "Studying psychology" },
       { th: "การได้ดูแลปรนนิบัติ", en: "Looking after and doting on someone" },
     ],
@@ -183,7 +185,7 @@ window.CUPID_CONTENT = (function () {
         mode: "normal", ownerEn: true,
         name: { th: "การใช้คำพูดที่อ่อนโยนไพเราะ", en: "Gentle, Sweet Words" },
         text: {
-          th: 'คิวปิดจะใช้น้ำเสียงและภาษาพูดบอกรักที่อ่อนโยนนุ่มนวลเพื่อเอาใจคุณ และจะเรียกคุณว่า "ที่รัก"(My dear) เขาไม่สนว่าคุณจะมีชื่อว่าอะไรเขาก็จะเรียกแบบนี้ มันเหมือนเป็นชื่อและการกำหนดตัวตนของคุณ',
+          th: 'คิวปิดจะใช้น้ำเสียงและภาษาพูดบอกรักที่อ่อนโยนนุ่มนวลเพื่อเอาใจคุณ และจะเรียกคุณว่า "ที่รัก" เขาไม่สนว่าคุณจะมีชื่อว่าอะไรเขาก็จะเรียกแบบนี้ มันเหมือนเป็นชื่อและการกำหนดตัวตนของคุณ',
           en: 'Cupid speaks to you in a soft, tender voice and with loving words to please you, and he calls you "My dear". Whatever your name is, he doesn\'t care: this is what he calls you. It becomes like your name, and what defines who you are.',
         },
       },
@@ -230,7 +232,7 @@ window.CUPID_CONTENT = (function () {
     },
     // 3. ข้อมูลหลัก
     story: {
-      th: "'คิวปิด' คือผู้ชายที่ใครหลายคนมักจะฝันถึงบ่อยครั้ง และไม่ใช่ใบหน้าของคนที่คุณรู้จักด้วย แต่คิวปิดจะโผล่มาเข้าแทรกแซงเป็นส่วนหนึ่งในความฝันของคุณจนเกิดความรู้สึกคุ้นเคยไปเอง หากวิเคราะห์ตาม 'ทฤษฎีแม่แบบบุคลิกภาพ' (Archetype Theory) ของ Carl Jung คิวปิดเป็นเหมือน Anima หรือ Animus ของผู้ฝัน มันคือลักษณะตรงข้ามของบุคลิกตนเอง ทั้งเพศและนิสัย แล้วคิวปิดยังเป็นตัวตนในจิตไร้สำนึก ซึ่งอาจปรากฏขึ้นในช่วงจุดเปลี่ยนแปลงของชีวิต โดยมีโอกาสเกิดขึ้นกับบุคคลที่มีความรู้สึกอ่อนไหวทางความรู้สึก แต่... นี่ยังเป็นแค่การวิเคราะห์แบบคาดเดาเพราะ คิวปิด ยังเป็นตัวตนปริศนาที่อยู่ในความคิดของผู้คนต่อไป",
+      th: "'คิวปิด' คือผู้ชายที่ใครหลายคนมักจะฝันถึงบ่อยครั้ง และไม่ใช่ใบหน้าของคนที่คุณรู้จักด้วย แต่คิวปิดจะโผล่มาเข้าแทรกแซงเป็นส่วนหนึ่งในความฝันของคุณจนเกิดความรู้สึกคุ้นเคยไปเอง หากวิเคราะห์ตาม 'ทฤษฎีแม่แบบบุคลิกภาพ' ของ คาร์ล ยุง คิวปิดเป็นเหมือน อนิมา หรือ อนิมัส ของผู้ฝัน มันคือลักษณะตรงข้ามของบุคลิกตนเอง ทั้งเพศและนิสัย แล้วคิวปิดยังเป็นตัวตนในจิตไร้สำนึก ซึ่งอาจปรากฏขึ้นในช่วงจุดเปลี่ยนแปลงของชีวิต โดยมีโอกาสเกิดขึ้นกับบุคคลที่มีความรู้สึกอ่อนไหวทางความรู้สึก แต่... นี่ยังเป็นแค่การวิเคราะห์แบบคาดเดาเพราะ คิวปิด ยังเป็นตัวตนปริศนาที่อยู่ในความคิดของผู้คนต่อไป",
       en: "'Cupid' is a man many people often dream about, and his is not the face of anyone you know. Yet Cupid slips into your dreams and becomes part of them until he starts to feel familiar. Analysed through Carl Jung's archetype theory, Cupid is like the dreamer's Anima or Animus: the opposite of their own personality, in both gender and character. Cupid is also a presence in the unconscious mind, who may appear at turning points in life and is more likely to come to people who are emotionally sensitive. But... this is still only a guess, because Cupid remains a mysterious presence living in people's minds.",
     },
     testimony: {
@@ -240,7 +242,7 @@ window.CUPID_CONTENT = (function () {
       },
       quote: {
         th: '" เมื่อสามปีก่อนฉันเจอเรื่องหดหู่ในชีวิตฉัน จนในคืนหนึ่งฉันฝันเห็น เขา แล้วจากนั้นก็ฝันถึงเขามากขึ้น ทั้งที่ฉันไม่เคยเจอผู้ชายคนนี้มาก่อน เขาแนะนำตัวว่าชื่อ คิวปิด และฉันก็บอกชื่อของฉันไป แต่เขากลับเรียกฉันว่า ที่รัก ซะงั้น ฉันไม่ได้เป็นอะไรกับเขาเลย แต่หลังจากนั้นมาเวลาฉันเจอเรื่องเครียดหรือสิ้นหวังคิวปิดก็จะปลอบและให้กำลัง ทำให้ฉันรู้สึกว่า ยังมีคนเข้าใจฉัน ฉันไม่ได้อยู่ตัวคนเดียว "',
-        en: '"Three years ago something in my life left me in despair, until one night I dreamed of him. After that I dreamed of him more and more, even though I had never met this man before. He introduced himself as Cupid, and I told him my name, but he called me \'My dear\' instead. I\'m nothing to him at all. But ever since then, whenever I\'m stressed or feel hopeless, Cupid comforts me and gives me strength. It makes me feel that someone still understands me, that I\'m not alone."',
+        en: '"Three years ago something in my life left me in despair, until one night I dreamed of him. After that I dreamed of him more and more, even though I had never met this man before. He introduced himself as Cupid, and I told him my name, but he called me \'My dear\' instead. It\'s not like we\'re in a relationship or anything. But ever since then, whenever I\'m stressed or feel hopeless, Cupid comforts me and gives me strength. It makes me feel that someone still understands me, that I\'m not alone."',
       },
     },
     // Handwritten callouts on the main picture: short pieces of the owner's outfit text.
@@ -296,12 +298,12 @@ window.CUPID_CONTENT = (function () {
       id: "polaroid", layout: "polaroid", mode: "normal", image: "father-portrait",
       title: { th: "รูปที่ชอบที่สุด", en: "A favourite photo" },
       caption: { th: "DIE ALONE — ตัวหนังสือบนเสื้อ", en: "DIE ALONE — written on the shirt" },
-      date: blank, entry: blank, toc: true,
+      entry: blank, toc: true,
     },
     {
       id: "entry-1", layout: "entry", mode: "normal", image: "rapizran-night",
       title: { th: "บันทึกหน้าแรก", en: "First entry" },
-      date: blank, entry: blank, toc: true,
+      entry: blank, toc: true,
     },
     // ---- dark pages (only in Dark mode) ----
     {
@@ -312,7 +314,7 @@ window.CUPID_CONTENT = (function () {
     {
       id: "secret-entry", layout: "torn", mode: "dark", image: "maya-monochrome",
       title: { th: "อย่าอ่าน", en: "Don't read this" },
-      date: blank, entry: blank,
+      entry: blank,
     },
     // ---- back to normal pages ----
     {
@@ -357,20 +359,20 @@ window.CUPID_CONTENT = (function () {
       /*
        * Relationship scales from the owner's chart, shown beside the card. Each row has a
        * word at each end; cupid (pink butterfly) and dear (purple diamond) are positions
-       * from 0 (all the way left) to 9 (all the way right). Words are the owner's English,
-       * shown in both languages; "Intereste" → "Interested" and "Dominate" → "Dominant".
+       * from 0 (all the way left) to 9 (all the way right). English words are the owner's
+       * ("Intereste" → "Interested", "Dominate" → "Dominant"); Thai words are the owner's own.
        */
       scales: [
-        { left: "Extrovert", right: "Introvert", cupid: 3, dear: 7 },
-        { left: "Jealous", right: "Chill", cupid: 0, dear: 9 },
-        { left: "Overprotective", right: "Detached", cupid: 0, dear: 8 },
-        { left: "Devoted", right: "Casual", cupid: 2, dear: 5 },
-        { left: "Interested", right: "Easygoing", cupid: 0, dear: 5 },
-        { left: "Attention", right: "Space", cupid: 0, dear: 7 },
-        { left: "Dominant", right: "Submissive", cupid: 0, dear: 9 },
-        { left: "Possessive", right: "Lax", cupid: 0, dear: 9 },
-        { left: "Devotus", right: "Innocent", cupid: 1, dear: 8 },
-        { left: "In love", right: "Unsure", cupid: 0, dear: 9 },
+        { left: { th: "คนเปิดเผย", en: "Extrovert" }, right: { th: "คนเก็บตัว", en: "Introvert" }, cupid: 3, dear: 7 },
+        { left: { th: "หึงหวง", en: "Jealous" }, right: { th: "สบายๆ", en: "Chill" }, cupid: 0, dear: 9 },
+        { left: { th: "ปกป้องมากเกินไป", en: "Overprotective" }, right: { th: "เฉยเมย", en: "Detached" }, cupid: 0, dear: 8 },
+        { left: { th: "ทุ่มเท", en: "Devoted" }, right: { th: "ไม่จริงจัง", en: "Casual" }, cupid: 2, dear: 5 },
+        { left: { th: "ใส่ใจ", en: "Interested" }, right: { th: "เป็นคนง่ายๆ", en: "Easygoing" }, cupid: 0, dear: 5 },
+        { left: { th: "เรียกร้องความสนใจ", en: "Attention" }, right: { th: "ส่วนตัว", en: "Space" }, cupid: 0, dear: 7 },
+        { left: { th: "ควบคุม", en: "Dominant" }, right: { th: "ยอมจำนน", en: "Submissive" }, cupid: 0, dear: 9 },
+        { left: { th: "ครอบครอง", en: "Possessive" }, right: { th: "ปล่อยปละละเลย", en: "Lax" }, cupid: 0, dear: 9 },
+        { left: { th: "เจ้าเล่ห์", en: "Devotus" }, right: { th: "ไร้เดียงสา", en: "Innocent" }, cupid: 1, dear: 8 },
+        { left: { th: "ตกหลุมรัก", en: "In love" }, right: { th: "ไม่แน่ใจ", en: "Unsure" }, cupid: 0, dear: 9 },
       ],
     },
     // Add more people by copying the block above. Use mode: "dark" for a secret one.

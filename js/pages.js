@@ -14,10 +14,6 @@ window.CupidPages = (function () {
       .join("");
   }
 
-  function dateLine(p) {
-    return `<p class="page-date"><span>${esc(ui("diary.date"))}</span> ${t(p.date)}</p>`;
-  }
-
   const layouts = {
     cover(p) {
       return `
@@ -99,7 +95,6 @@ window.CupidPages = (function () {
         </figure>
         <div class="entry entry--short">
           <h3 class="page-title page-title--hand">${t(p.title)}</h3>
-          ${dateLine(p)}
           <p class="entry__text">${t(p.entry, { block: true })}</p>
         </div>`;
     },
@@ -107,7 +102,6 @@ window.CupidPages = (function () {
     entry(p) {
       return `
         <div class="ruled">
-          ${dateLine(p)}
           <h3 class="page-title">${t(p.title)}</h3>
           <p class="entry__text">${t(p.entry, { block: true })}</p>
         </div>
@@ -153,7 +147,6 @@ window.CupidPages = (function () {
       return `
         <div class="torn">
           <h3 class="page-title page-title--struck">${t(p.title)}</h3>
-          ${dateLine(p)}
           <figure class="torn__photo tilt-l">${tape("tape--dark")}${img(p.image, { sizes: "(max-width: 860px) 70vw, 300px" })}</figure>
           <p class="entry__text">${t(p.entry, { block: true })}</p>
         </div>`;
