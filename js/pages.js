@@ -1,9 +1,21 @@
 /* Diary page templates. Each layout returns the inside of one page. */
 window.CupidPages = (function () {
-  const { C, esc, ui, txt, t, img, icon, isVisible } = window.Cupid;
+  const { C, state, esc, ui, txt, t, img, icon, isVisible } = window.Cupid;
 
   const tape = (cls) => `<span class="tape ${cls || ""}" aria-hidden="true"></span>`;
   const hand = (s, cls) => `<p class="hand ${cls || ""}">${s}</p>`;
+
+  /** A caption only breaks at its dash ("DIE ALONE — ..."), so no word is left alone on a line. */
+  function caption(field) {
+    const s = txt(field);
+    if (!s.includes(" — ")) return t(field);
+    const html = s
+      .split(" — ")
+      .map((part, i, all) => `<span class="keep">${esc(part)}${i < all.length - 1 ? " —" : ""}</span>`)
+      .join(" ");
+    const other = state.lang === "th" ? "en" : "th";
+    return typeof field === "object" && !field[state.lang] ? `<span lang="${other}">${html}</span>` : html;
+  }
 
   function callouts(list) {
     return (list || [])
@@ -91,7 +103,7 @@ window.CupidPages = (function () {
         <figure class="polaroid tilt-l">
           ${tape("tape--top")}
           ${img(p.image, { sizes: "(max-width: 860px) 60vw, 260px" })}
-          <figcaption class="hand">${t(p.caption)}</figcaption>
+          <figcaption class="hand">${caption(p.caption)}</figcaption>
         </figure>
         <div class="entry entry--short">
           <h3 class="page-title page-title--hand">${t(p.title)}</h3>
@@ -117,7 +129,7 @@ window.CupidPages = (function () {
         <figure class="duo">
           ${img(p.image, { sizes: "(max-width: 860px) 80vw, 380px" })}
         </figure>
-        <p class="duo__with"><span>${esc(ui("diary.with"))}</span> ${t(p.who)}</p>
+        <p class="duo__to"><span>${esc(ui("diary.to"))}</span> ${t(p.who)}</p>
         <p class="entry__text">${t(p.entry, { block: true })}</p>
         <div class="duo__mini tilt-r">${img(p.second, { sizes: "160px" })}</div>`;
     },
@@ -137,17 +149,20 @@ window.CupidPages = (function () {
 
     // ---------- dark-mode layouts ----------
     bleed(p) {
+      // the paper note is optional: a page without one shows only the picture
       return `
         <figure class="bleed">${img(p.image, { sizes: "(max-width: 860px) 95vw, 520px" })}</figure>
         <span class="stitches" aria-hidden="true"></span>
-        <p class="scrap hand">${t(p.note)}</p>`;
+        ${txt(p.note) ? `<p class="scrap hand">${t(p.note)}</p>` : ""}`;
     },
 
+    // A letter that runs on over several pages: only its first page has the title and photo;
+    // `last: true` sets the closing words alone in the middle of the page.
     torn(p) {
       return `
-        <div class="torn">
-          <h3 class="page-title page-title--struck">${t(p.title)}</h3>
-          <figure class="torn__photo tilt-l">${tape("tape--dark")}${img(p.image, { sizes: "(max-width: 860px) 70vw, 300px" })}</figure>
+        <div class="torn${p.last ? " torn--last" : ""}">
+          ${p.title ? `<h3 class="page-title page-title--struck">${t(p.title)}</h3>` : ""}
+          ${p.image ? `<figure class="torn__photo tilt-l">${tape("tape--dark")}${img(p.image, { sizes: "(max-width: 860px) 70vw, 300px" })}</figure>` : ""}
           <p class="entry__text">${t(p.entry, { block: true })}</p>
         </div>`;
     },
@@ -191,6 +206,107 @@ window.CupidPages = (function () {
     },
   };
 
+  /*
+   * Long entries. When a page's writing is longer than the space left for it, the page's
+   * picture shrinks first (down to half), then the writing gets a little smaller (down to
+   * 88 %). The duo and mirror pages may then drop their picture (the duo's small one in the
+   * corner stays; the mirror page faces the same form). Only if that is still not enough, on
+   * very small screens, does the writing scroll inside the page. Results are remembered per
+   * page, language and page size.
+   */
+  const MIN_ART = 0.5;
+  const MIN_TEXT = 0.88;
+  const fitted = new Map();
+
+  function topIn(el, stop) {
+    let y = 0;
+    for (let n = el; n && n !== stop; n = n.offsetParent) y += n.offsetTop;
+    return y;
+  }
+
+  function applyFit(page, text, f) {
+    if (f.art) page.style.setProperty("--art", f.art);
+    if (f.fit) page.style.setProperty("--fit", f.fit);
+    page.classList.toggle("no-art", !!f.noArt);
+    if (f.scroll) {
+      text.style.maxHeight = f.scroll + "px";
+      text.classList.add("is-scroll");
+    }
+  }
+
+  function fitPage(page) {
+    const text = page.querySelector(".entry__text");
+    const inner = page.querySelector(".page__inner");
+    if (!text || !inner || !page.offsetHeight) return;
+    page.style.removeProperty("--art");
+    page.style.removeProperty("--fit");
+    page.classList.remove("no-art");
+    text.classList.remove("is-scroll");
+    text.style.maxHeight = "";
+
+    const key = `${page.dataset.page}|${state.lang}|${page.offsetWidth}x${page.offsetHeight}`;
+    if (fitted.has(key)) return applyFit(page, text, fitted.get(key));
+
+    const clipped = page.querySelector(".clipped");
+    const room = () => {
+      let limit = inner.clientHeight - parseFloat(getComputedStyle(inner).paddingBottom);
+      if (clipped) limit = Math.min(limit, clipped.offsetTop - 6);
+      return limit - topIn(text, inner);
+    };
+    // offsetHeight is a whole number: keep 1px spare so a fraction never crosses the line
+    const fits = () => text.offsetHeight + 1 <= room();
+    // largest value in [min, 1] that still fits; false (left at min) when even min is not enough
+    const search = (prop, min) => {
+      page.style.setProperty(prop, min);
+      if (!fits()) return false;
+      let lo = min;
+      let hi = 1;
+      for (let i = 0; i < 7; i++) {
+        const mid = (lo + hi) / 2;
+        page.style.setProperty(prop, mid);
+        if (fits()) lo = mid;
+        else hi = mid;
+      }
+      // round down: a hair larger than the value tested can wrap one more line
+      page.style.setProperty(prop, String(Math.floor(lo * 1000) / 1000));
+      return true;
+    };
+    const read = (prop) => parseFloat(page.style.getPropertyValue(prop)) || 0;
+
+    let f = {};
+    if (!fits()) {
+      if (search("--art", MIN_ART)) f = { art: read("--art") };
+      else if (search("--fit", MIN_TEXT)) f = { art: MIN_ART, fit: read("--fit") };
+      else {
+        f = { art: MIN_ART, fit: MIN_TEXT };
+        // the duo keeps its small picture in the corner; the mirror page faces the same form
+        if (page.querySelector(".duo, .pair__art")) {
+          page.classList.add("no-art");
+          page.style.removeProperty("--fit");
+          f = { art: MIN_ART, noArt: true };
+          if (!fits()) f.fit = search("--fit", MIN_TEXT) ? read("--fit") : MIN_TEXT;
+          page.style.setProperty("--fit", f.fit || 1);
+        }
+        if (!fits()) f.scroll = Math.max(48, Math.floor(room()));
+      }
+    }
+    fitted.set(key, f);
+    page.style.removeProperty("--art");
+    page.style.removeProperty("--fit");
+    page.classList.remove("no-art");
+    applyFit(page, text, f);
+  }
+
+  /** Fit every diary page inside `root` (the book, or a turning sheet). */
+  function fit(root) {
+    root.querySelectorAll(".page").forEach(fitPage);
+  }
+
+  /** Fonts arriving late change how much space text needs. */
+  function forget() {
+    fitted.clear();
+  }
+
   const COVERS = { cover: true, back: true };
 
   /**
@@ -223,5 +339,5 @@ window.CupidPages = (function () {
     });
   }
 
-  return { build };
+  return { build, fit, forget };
 })();

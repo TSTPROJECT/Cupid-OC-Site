@@ -64,6 +64,7 @@ window.CupidFlipbook = function (root, opts) {
     leaf.hidden = true;
     front.innerHTML = "";
     back.innerHTML = "";
+    opts.onLayout && opts.onLayout(stage);
     opts.onChange && opts.onChange(status());
   }
 
@@ -106,6 +107,7 @@ window.CupidFlipbook = function (root, opts) {
     }
     leaf.classList.toggle("leaf--hard", !!leaf.querySelector(".page--hard"));
     leaf.hidden = false;
+    opts.onLayout && opts.onLayout(stage);
     setShift(shiftFor(target));
     turning = { dir, target, progress: 0 };
     draw(0);

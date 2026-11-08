@@ -132,7 +132,23 @@
     },
     onZoom: (key) => window.CupidLightbox.open(key),
     onTurn: () => window.CupidAudio.sfx.page(),
+    // long entries are fitted to the page each time pages are placed
+    onLayout: (el) => window.CupidPages.fit(el),
   });
+  // ...and again when the book changes size or the fonts arrive
+  let refitTimer = 0;
+  window.addEventListener("resize", () => {
+    clearTimeout(refitTimer);
+    refitTimer = setTimeout(() => window.CupidPages.fit(bookEl), 150);
+  });
+  if (document.fonts) {
+    const refit = () => {
+      window.CupidPages.forget();
+      window.CupidPages.fit(bookEl);
+    };
+    document.fonts.addEventListener("loadingdone", refit);
+    document.fonts.ready.then(refit);
+  }
   $("#book-prev").addEventListener("click", () => book.prev());
   $("#book-next").addEventListener("click", () => book.next());
   $("#book-first").addEventListener("click", () => book.first());

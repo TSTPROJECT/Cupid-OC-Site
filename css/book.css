@@ -289,8 +289,20 @@
   text-decoration-color: var(--s-vivid);
   text-decoration-thickness: 2px;
 }
+/* --fit and --art are set by CupidPages.fit when a page's writing is longer than its space */
 .entry__text {
   color: var(--pg-ink);
+  font-size: calc(1em * var(--fit, 1));
+}
+/* last resort on very small screens: the writing scrolls inside the page */
+.entry__text.is-scroll {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 0.5em 1.6em 0;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--pg-accent) 55%, transparent) transparent;
+  -webkit-mask-image: linear-gradient(#000 calc(100% - 1.6em), transparent);
+  mask-image: linear-gradient(#000 calc(100% - 1.6em), transparent);
 }
 .page .callout span {
   font-size: 1.25em;
@@ -631,8 +643,12 @@
 :lang(th) .polaroid figcaption {
   font-size: 0.95em;
 }
+/* caption parts stay whole: "DIE ALONE —" / "ตัวหนังสือบนเสื้อ" */
+.polaroid figcaption .keep {
+  display: inline-block;
+}
 .page--polaroid .polaroid {
-  width: 52cqw;
+  width: calc(52cqw * var(--art, 1));
   align-self: center;
   margin-top: 1cqw;
 }
@@ -662,7 +678,7 @@
   position: absolute;
   right: 7cqw;
   bottom: 11cqw;
-  width: 56cqw;
+  width: calc(56cqw * var(--art, 1));
   margin: 0;
   background: #fdfaf4;
   padding: 1.8cqw;
@@ -690,17 +706,27 @@
 /* ---------- duo ---------- */
 .duo {
   margin: 0;
-  width: 74cqw;
+  width: calc(74cqw * var(--art, 1));
   align-self: center;
   background: radial-gradient(circle, color-mix(in srgb, var(--c-pink) 20%, transparent), transparent 70%);
 }
-.duo__with {
+/* a long letter on a small page: the big picture steps aside (the duo's small one stays) */
+.page.no-art .duo,
+.page.no-art .pair__art,
+.page.no-art .flutter {
+  display: none;
+}
+/* ...and the letter starts below the small picture in the corner */
+.page.no-art .duo__to {
+  margin-top: 4cqw;
+}
+.duo__to {
   font-family: var(--f-hand);
   font-size: 1.4em;
   color: var(--pg-ink-2);
   text-align: center;
 }
-:lang(th) .duo__with {
+:lang(th) .duo__to {
   font-size: 1.05em;
 }
 .duo__mini {
@@ -811,9 +837,24 @@
   flex-direction: column;
   gap: 2.4cqw;
 }
+/* the letter's closing words, alone in the middle of its page */
+.torn--last {
+  flex: 1;
+  justify-content: center;
+  text-align: center;
+}
+.torn--last .entry__text {
+  font-family: var(--f-hand);
+  font-size: calc(1.45em * var(--fit, 1));
+  line-height: 1.35;
+}
+:lang(th) .torn--last .entry__text {
+  font-size: calc(1.15em * var(--fit, 1));
+  line-height: 1.6;
+}
 .torn__photo {
   position: relative;
-  width: 62cqw;
+  width: calc(62cqw * var(--art, 1));
   margin: 1cqw auto;
   background: #e8e2d8;
   padding: 2cqw;
@@ -830,7 +871,7 @@
 }
 .pair__art {
   margin: 0;
-  width: 50cqw;
+  width: calc(50cqw * var(--art, 1));
   background: radial-gradient(ellipse at 50% 60%, rgba(153, 75, 219, 0.28), transparent 65%);
 }
 .pair__text {

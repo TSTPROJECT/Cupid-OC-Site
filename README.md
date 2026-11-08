@@ -48,6 +48,13 @@ Everything the site says about Cupid is in `js/content.js`.
   rendered in Light mode (use it with a matching dark item to swap one for the other).
 - Diary pages are listed in reading order in `DIARY`. Keep the number of normal pages **even** and the
   number of dark pages **even**, so the back cover always lands on a left-hand page.
+- A letter too long for one page runs on over the next page(s): give each following page `layout: "torn"`
+  with only an `entry` (no title or image), and `last: true` on the final one to set its closing words alone
+  in the middle of the page. "Don't read this" is written this way over three dark pages.
+- Pages fit their writing by themselves (`CupidPages.fit` in `js/pages.js`): when the text is longer than the
+  space, the page's picture shrinks (to half at most), then the text gets a little smaller (to 88 % at
+  most); on small screens the duo and mirror pages let their picture step aside, and as a last resort the
+  text scrolls inside the page.
 - Add relationships by copying the block in `RELATIONSHIPS`. Its `scales` list draws the relationship chart beside
   the card: each row is a word at each end (`{ th, en }`) and a position from 0 (left) to 9 (right) for Cupid and for the other person.
 
@@ -120,10 +127,16 @@ owner's two reference pictures (a 3D avatar and a chibi pair). The reference pic
 
 The entrance shows an 18+ content warning; opening the diary counts as confirming the visitor is 18 or older.
 
+The diary letters (A favourite photo, First entry, Someone dear, Don't read this, In the mirror) are the
+owner's own Thai text, exactly as sent, with no spelling changes; the English is a translation written for
+this site. The owner asked for "ถึง ที่รัก" (To My dear) above the duo letter and for the paper note on the
+pale-form page to be taken off.
+
 ## Still needed from the owner
 
 - Which photos are Dark-mode only (the red-circled reference)
-- The emoji (the profile shows a blank for it in both modes)
-- Diary entry texts and dates
 - Relationship type and description for ที่รัก (empty fields are simply not shown on the card)
-- Character owner name and special thanks for the credits
+- First entry: its last sentence ("เพราะสำหรับผมการได้เห็นเธอเรียกหาแต่ชื่อของผม") seems unfinished; the
+  English ends with "…" until the owner says otherwise
+- In the mirror: "ดับสูบ" is kept as written — ask whether it should be ดับวูบ or ดับสูญ
+- Optional: a dedication line for the bookplate and a note for the last page
