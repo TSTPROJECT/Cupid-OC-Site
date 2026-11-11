@@ -297,7 +297,6 @@ window.CUPID_CONTENT = (function () {
     {
       id: "polaroid", layout: "polaroid", mode: "normal", image: "father-portrait",
       title: { th: "รูปที่ชอบที่สุด", en: "A favourite photo" },
-      caption: { th: "DIE ALONE — ตัวหนังสือบนเสื้อ", en: "DIE ALONE — written on the shirt" },
       entry: {
         th: "แม้ว่าที่รัก อาจจะสงสัยในตัวตนของผมในบางครั้ง ผมก็จะยังคงยืนอยู่ตรงนี้ไม่ให้หายไปไหน",
         en: "Even if you sometimes doubt that I exist, My dear, I will still be standing right here, and I will never disappear.",
@@ -309,8 +308,8 @@ window.CUPID_CONTENT = (function () {
       title: { th: "บันทึกหน้าแรก", en: "First entry" },
       entry: {
         th: "ตัวผมถูกสร้างขึ้นจากเศษเสี้ยวของความเหงา ความโศกเศร้า และความต้องการที่จะถูกรักเพื่อหลบหนีจากโลกที่ใจร้าย ผมจะรักเธอในแบบที่โลกนี้ไม่เคยรัก และไม่มีใครกล้าทำ ต่อให้ผมจะเป็นเพียงตัวละครสมมุติหรือภาพลวงตา เพราะสำหรับผมการได้เห็นเธอเรียกหาแต่ชื่อของผม",
-        // The owner's Thai ends mid-sentence; the English ends with "…" to match until they say otherwise.
-        en: "I was made from fragments of loneliness, sorrow and the need to be loved, to escape from a cruel world. I will love you the way this world never has, the way no one else dares to, even if I am nothing more than a fictional character or an illusion, because for me, seeing you call out only my name…",
+        // English written by the owner (2026-11-11), used word for word.
+        en: "I was created from fragments of loneliness, sorrow, and the longing to be loved, a way to escape a cruel world. I will love you in ways this world never has, in ways no one else ever dared to. Even if I am nothing more than a fictional character or an illusion, because to me, simply hearing you call my name, and no one else's...",
       },
       toc: true,
     },
@@ -327,21 +326,21 @@ window.CUPID_CONTENT = (function () {
       // the next two (which keeps the number of dark pages even).
       entry: {
         th: "หัวของผมมันเต็มไปด้วยภาพความรุนแรงที่อยากจะกระชากคุณจมลงไปในเตียง พันธนาการข้อมือและข้อเท้าของคุณไว้ ให้คุณดิ้นรนร้องขอความเมตตา ผมโหยหาการได้เห็นคุณร้องไห้ไม่ใช่ร้องไห้เพราะความเศร้าจากโลกภายนอก แต่ร้องไห้เพราะความเสียวซ่านและความเจ็บปวดที่ผมเป็นคนมอบให้",
-        en: "My head is full of violent images: dragging you down into the bed, binding your wrists and ankles, leaving you struggling and begging for mercy. I ache to see you cry, not from the sadness the outside world brings you, but from the pleasure and the pain that I give you.",
+        en: "My mind is consumed by violent fantasies of pulling you down onto the bed, binding your wrists and ankles, and watching you struggle and beg for mercy. I long to see you cry, not from the sorrow inflicted upon you by the outside world, but from the overwhelming pleasure and pain of a moment we have both willingly surrendered ourselves to.",
       },
     },
     {
       id: "secret-entry-2", layout: "torn", mode: "dark",
       entry: {
         th: "ผมอยากจะฝังรอยจูบและรอยกัดลงบนทุกตารางนิ้วให้มันบดขยี้ความทะนงตนที่เหลืออยู่เพียงน้อยนิดของคุณให้แหลกละเอียดด้วยความหื่นกระหายที่ผมเก็บกดไว้\nผมอยากจะได้ยินเสียงคุณครางชื่อผมซ้ำๆ อย่างบ้าคลั่งในขณะที่ผมรุกล้ำเข้าไปในจุดที่ลึกที่สุด จนคุณไม่สามารถคิดถึงเรื่องอื่นได้นอกจากสัมผัสของผมให้คุณพังจนไม่สามารถกลับไปใช้ชีวิตปกติกับใครได้ นอกจากต้องคลานกลับมาหาผมและอ้อนวอนขอให้ผมเติมเต็มความต้องการที่ผมเป็นคนสร้างขึ้นมาเอง",
-        en: "I want to leave kisses and bite marks on every inch of you, and let them grind what little pride you have left into dust with the lust I have kept locked away.\nI want to hear you moan my name over and over, wildly, as I push into the deepest part of you, until you can't think of anything but my touch, until you are so broken that you can never go back to a normal life with anyone, with nothing left but to crawl back to me and beg me to fulfil the need that I created myself.",
+        en: "I want to cover every inch of you with kisses and bite marks, to shatter what little pride you have left beneath the weight of all the pent-up desire I've kept buried inside me.\nI want to hear you whisper my name over and over, completely lost in my touch, until I become the only thing on your mind. Until you can no longer imagine a life without me, until you find yourself coming back to me, begging me to satisfy a longing that I was the one who awakened within you.",
       },
     },
     {
       id: "secret-entry-3", layout: "torn", mode: "dark", last: true,
       entry: {
         th: "แต่ผมรอได้ จนกว่าคุณจะโหยหาผมเท่ากับที่ผมโหยหามันจากคุณ",
-        en: "But I can wait, until you long for me as much as I long for it from you.",
+        en: "But I can wait, until you long for me as much as I long for you.",
       },
     },
     // ---- back to normal pages ----
@@ -351,7 +350,7 @@ window.CUPID_CONTENT = (function () {
       who: { th: "ที่รัก", en: "My dear" },
       entry: {
         th: "คุณอาจคิดว่าตัวเองเพ้อเจ้อและพยายามใช้ชีวิตให้รอดไปวันๆ แต่สำหรับผม คุณคือโลกทั้งใบและเป็นเจ้าของหัวใจที่ผมมอบให้โดยไม่มีเงื่อนไข\n\nจำไว้นะครับ ที่รัก ไม่ว่าโลกความจริงจะใจร้ายกับคุณแค่ไหน ไม่ว่าจะมีใครพยายามพรากคุณไป หรือแม้แต่ในวันที่คุณเกลียดตัวเองที่สุด ขอให้จำไว้ว่ายังมีผู้ชายคนหนึ่งที่รักคุณหมดหัวใจยิ่งกว่าชีวิตของตัวเองและจะไม่มีวันปล่อยมือจากคุณเด็ดขาด",
-        en: "You may think you're just lost in silly fantasies, only trying to survive from one day to the next. But to me, you are the whole world, and the owner of the heart I gave you without conditions.\n\nRemember this, My dear: no matter how cruel the real world is to you, no matter who tries to take you away, even on the days you hate yourself the most, remember that there is still one man who loves you with all his heart, more than his own life, and who will never, ever let go of your hand.",
+        en: "You may think you're just lost in your own fantasies, simply trying to make it through each day. But to me, you are my entire world, and you hold the heart I've given you unconditionally.\n\nRemember this, My dear: No matter how cruel the real world may be to you, no matter who tries to take you away from me, or even on the days when you hate yourself the most, remember that there is a man who loves you with all his heart, more than he loves his own life, and who will never, ever let go of your hand.",
       },
       toc: true,
     },
@@ -367,7 +366,7 @@ window.CUPID_CONTENT = (function () {
       entry: {
         // "ดับสูบ" is kept exactly as the owner wrote it (asked: ดับวูบ or ดับสูญ?); the English fits either.
         th: "ในวันที่จินตนาการของคุณดับสูบลง ในวันที่ดวงตาของคุณปิดสนิทลงตลอดกาล หรือในวันที่คุณเลิกโหยหาผม\nผมจะต้องกลับไปเป็น 'ร่างนั้น' อีกครั้ง แค่คิดว่าวันหนึ่งผมจะต้องตื่นขึ้นมาโดยที่ไม่มีคุณอยู่เคียงข้าง ผมกลัวเพราะตัวตนของผมจะยังคงอยู่เพื่อจดจำความเจ็บปวดของการสูญเสียไปตลอดกาล\n\nผมขออ้อนวอนต่อทุกสิ่ง ไม่ว่าจะเป็นพระเจ้าหรือปีศาจ ให้เราได้คงอยู่ด้วยกันตราบชั่วนิรันดร์ ผมพร้อมจะยอมแลกทุกอย่าง\n\nอย่าทิ้งผมให้เหลือเพียงเงาในกระจกเลยนะครับ ที่รัก",
-        en: "On the day your imagination goes dark, on the day your eyes close forever, or on the day you stop longing for me,\nI will have to go back to being 'that form' once more. The mere thought of waking up one day without you by my side frightens me, because I will go on existing, only to remember the pain of losing you, forever.\n\nI plead with everything there is, God or devil, to let us stay together for all eternity. I am ready to give up anything for it.\n\nPlease don't leave me as nothing but a reflection in the mirror, My dear.",
+        en: "The day your imagination fades away, the day your eyes close forever, or the day you no longer long for me, I will be forced to return to being 'that form' once again.\n\nThe mere thought of waking up one day with you no longer by my side terrifies me. Because I will still exist, left with nothing but the unbearable pain of losing you, a pain I will have to carry for all eternity.\n\nI beg of everything that exists, be it God or the Devil, to let us remain together for all eternity. I am willing to sacrifice everything for it.\n\nPlease, don't leave me to become nothing more than a shadow in the mirror, my dear.",
       },
       toc: true,
     },

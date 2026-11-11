@@ -647,6 +647,10 @@
 .polaroid figcaption .keep {
   display: inline-block;
 }
+/* no caption: keep the wide white strip at the bottom of a real polaroid */
+.polaroid--blank {
+  padding-bottom: 8cqw;
+}
 .page--polaroid .polaroid {
   width: calc(52cqw * var(--art, 1));
   align-self: center;

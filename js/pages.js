@@ -100,10 +100,10 @@ window.CupidPages = (function () {
 
     polaroid(p) {
       return `
-        <figure class="polaroid tilt-l">
+        <figure class="polaroid tilt-l${p.caption ? "" : " polaroid--blank"}">
           ${tape("tape--top")}
           ${img(p.image, { sizes: "(max-width: 860px) 60vw, 260px" })}
-          <figcaption class="hand">${caption(p.caption)}</figcaption>
+          ${p.caption ? `<figcaption class="hand">${caption(p.caption)}</figcaption>` : ""}
         </figure>
         <div class="entry entry--short">
           <h3 class="page-title page-title--hand">${t(p.title)}</h3>
